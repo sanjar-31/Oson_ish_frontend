@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection.vue";
 import EmployersSection from "@/components/EmployersSection.vue";
 import TelegramBanner from '@/components/TelegramBanner.vue';
 import FaqSection from '@/components/FaqSection.vue';
+import FooterSection from '@/components/Footer.vue';
 
 const currentIndex = ref(0);
 const cardWidth = 280;
@@ -324,6 +325,7 @@ const handleCategoryClick = (id) => {
   
   <TelegramBanner />
   <FaqSection />
+  <FooterSection />
 </template>
 
 <script>

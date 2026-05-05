@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Header from "@/components/Header.vue";
-
+import FooterSection from '@/components/Footer.vue'
 const companies = [
   { id: 1, name: '"DAVR DIZAYN SANOAT" MAS\'ULIYATI CHEKLANGAN JAMIYAT', vacancies: 60, logo: null },
   { id: 2, name: '"SARDOBA TUMANI TIBBIYOT BIRLASHMASI" DAVLAT MUASSASASI', vacancies: 54, logo: null },
@@ -135,6 +135,7 @@ const clearStirError = () => {
         </div>
       </aside>
     </main>
+    <FooterSection />
   </div>
 </template>
 
