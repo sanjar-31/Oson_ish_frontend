@@ -27,7 +27,7 @@
           />
         </svg>
       </div>
-
+      
       <!-- Text Block -->
       <div class="tg-text">
         <h2 class="tg-heading">So'nggi vakansiyalar endi Telegram kanalimizda!</h2>
