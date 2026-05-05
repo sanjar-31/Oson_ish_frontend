@@ -124,6 +124,33 @@ const handleCategoryClick = (id) => {
   activeCategoryId.value = id;
   console.log('Navigation event:', id);
 };
+
+const articles = [
+  {
+    id: 1,
+    title: "Suhbatdan muvaffaqiyatli o'tish bo'yicha foydali maslahatlar",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 2,
+    title: "IELTS lug'at boyligini o'rganish va qo'llash sirlari",
+    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 3,
+    title: "Xorijiy tillarni o'rganish bo'yicha 10 ta maslahat",
+    image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 4,
+    title: "CV/Rezyumeni qanday yozish kerak?",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
+  }
+];
+
+const goToArticle = (id) => {
+  console.log('article id:', id);
+};
 </script>
 
 <template>
@@ -328,41 +355,8 @@ const handleCategoryClick = (id) => {
   <FooterSection />
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      articles: [
-        {
-          id: 1,
-          title: "Suhbatdan muvaffaqiyatli o'tish bo'yicha foydali maslahatlar",
-          image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80"
-        },
-        {
-          id: 2,
-          title: "IELTS lug'at boyligini o'rganish va qo'llash sirlari",
-          image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80"
-        },
-        {
-          id: 3,
-          title: "Xorijiy tillarni o'rganish bo'yicha 10 ta maslahat",
-          image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=600&q=80"
-        },
-        {
-          id: 4,
-          title: "CV/Rezyumeni qanday yozish kerak?",
-          image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
-        }
-      ]
-    };
-  },
-  methods: {
-    goToArticle(id) {
-      console.log('article id:', id);
-    }
-  }
-};
-</script>
+
+
 
 
 <style scoped>
