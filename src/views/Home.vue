@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import Header from "@/components/Header.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import EmployersSection from "@/components/EmployersSection.vue";
+import TelegramBanner from '@/components/TelegramBanner.vue';
 
 const currentIndex = ref(0);
 const cardWidth = 280;
@@ -121,10 +122,6 @@ const handleCategoryClick = (id) => {
   activeCategoryId.value = id;
   console.log('Navigation event:', id);
 };
-
-const openTelegram = () => {
-  window.open('https://t.me/quliyev_sanjar', '_blank')
-}
 </script>
 
 <template>
@@ -324,29 +321,7 @@ const openTelegram = () => {
     </div>
   </section>
 
-  <!-- Telegram Banner Section -->
-  <section class="telegram-banner-section">
-    <div class="container">
-      <div class="telegram-banner">
-        <div class="banner-content">
-          <div class="telegram-icon-wrapper">
-            <div class="telegram-icon-circle">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 1.566 4.822c.188.52.094.726.544.726.35 0 .506-.16.7-.35l2.25-2.186 4.678 3.455c.863.476 1.48.23 1.696-.8l3.067-14.453c.314-1.26-.473-1.83-1.306-1.433z" fill="white"/>
-              </svg>
-            </div>
-          </div>
-          <div class="banner-text">
-            <h2 class="banner-title">So'nggi vakansiyalar endi Telegram kanalimizda!</h2>
-            <p class="banner-subtitle">Obuna bo'ling va so'nggi ish takliflarini kuzatib boring!</p>
-          </div>
-        </div>
-        <button class="subscribe-btn" @click="openTelegram">
-          Obuna bo'lish
-        </button>
-      </div>
-    </div>
-  </section>
+  <TelegramBanner />
 </template>
 
 <script>
