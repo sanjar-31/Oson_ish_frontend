@@ -19,7 +19,7 @@
           </router-link>
 
           <nav class="site-header__nav site-header__nav--desktop" aria-label="main">
-            <router-link to="/" class="nav-link">
+            <router-link to="/vacancies" class="nav-link">
               {{ text.vacanciesNav }}
             </router-link>
             <router-link to="/resumes" class="nav-link nav-link--resumes">
@@ -435,7 +435,7 @@ onUnmounted(() => {
 }
 
 .nav-link--resumes {
-  color: #11274c !important;
+  color: var(--color-text-secondary);
   font-weight: 600 !important;
   font-size: 15px !important;
   letter-spacing: -0.01em;
