@@ -22,7 +22,7 @@
             <router-link to="/" class="nav-link">
               {{ text.vacanciesNav }}
             </router-link>
-            <router-link to="/" class="nav-link">
+            <router-link to="/resumes" class="nav-link nav-link--resumes">
               {{ text.resumesNav }}
             </router-link>
             <router-link to="/companies" class="nav-link">
@@ -132,7 +132,7 @@
               <router-link to="/" class="nav-link nav-link--drawer">
                 {{ text.vacanciesNav }}
               </router-link>
-              <router-link to="/" class="nav-link nav-link--drawer">
+              <router-link to="/resumes" class="nav-link nav-link--drawer nav-link--resumes">
                 {{ text.resumesNav }}
               </router-link>
               <router-link to="/companies" class="nav-link nav-link--drawer">
@@ -291,7 +291,7 @@ onUnmounted(() => {
   --color-border: #e5e7eb;
   --color-teal: #00a3bf;
   --color-teal-dark: #0891b2;
-  --header-pad-x: clamp(4px, 1.6vw, 0.6cm);
+  --header-pad-x: 32px;
   --brand-copy-width: 15ch;
 
   width: 100%;
@@ -303,8 +303,6 @@ onUnmounted(() => {
 
 .site-header__shell {
   width: 100%;
-  max-width: min(1420px, 96vw);
-  margin-inline: auto;
 }
 
 .site-header__inner {
@@ -434,6 +432,17 @@ onUnmounted(() => {
 
 .nav-link:hover {
   color: #0f766e;
+}
+
+.nav-link--resumes {
+  color: #11274c !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: -0.01em;
+}
+
+.nav-link--resumes:hover {
+  color: #000 !important;
 }
 
 .nav-link--drawer {
