@@ -3,6 +3,7 @@ import Companies from '@/views/Companies.vue'
 import Home from '@/views/Home.vue'
 import Resumes from '@/views/Resumes.vue'
 import ComingSoon from '@/pages/ComingSoon.vue'
+import Vacancies from '@/views/Vacancies.vue'
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: '/companies',
         name: 'Companies',
         component: Companies
+    },
+    {
+        path: '/vacancies',
+        name: 'Vacancies',
+        component: Vacancies
     },
     {
         path: '/resume/create',
