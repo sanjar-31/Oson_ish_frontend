@@ -127,9 +127,9 @@ export default {
 
 /* ── Section 1: Top Area ──────────────────────────────────── */
 .footer-top {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 52px 40px 44px;
+  padding: 52px 32px 44px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -304,20 +304,18 @@ export default {
 
 /* ── Section 2: Divider ───────────────────────────────────── */
 .footer-divider {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   height: 1px;
   background-color: #243547;
-  margin-left: 40px;
-  margin-right: 40px;
-  /* override auto margins for side padding */
+  margin: 0;
 }
 
 /* ── Section 3: Bottom Bar ────────────────────────────────── */
 .footer-bottom {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 40px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;   
+  padding: 20px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -364,11 +362,6 @@ export default {
     width: 100%;
   }
 
-  .footer-divider {
-    margin-left: 24px;
-    margin-right: 24px;
-  }
-
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
@@ -380,11 +373,6 @@ export default {
 @media (max-width: 480px) {
   .footer-top {
     padding: 32px 16px 28px;
-  }
-
-  .footer-divider {
-    margin-left: 16px;
-    margin-right: 16px;
   }
 
   .footer-bottom {
