@@ -20,12 +20,10 @@
 
         <div class="results-row">
           <span class="results-text">15151 ta e'lon 46315 vakansiya topildi</span>
-          <div class="sort-dropdown">
-            Yangi vakansiyalar
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 9L12 15L18 9" stroke="#00B5B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <select class="sort-dropdown" v-model="sortOrder" @change="handleSortChange">
+            <option value="">Yangi vakansiyalar</option>
+            <!-- Boshqa optionlarni bu yerga qo'shishingiz mumkin -->
+          </select>
         </div>
 
         <Cards />
@@ -258,10 +256,15 @@ import Cards from './Cards.vue'
 
 // Search and mobile
 const searchQuery = ref('')
+const sortOrder = ref('')
 const isFilterOpen = ref(false)
 
 const toggleMobileFilter = () => {
   isFilterOpen.value = !isFilterOpen.value
+}
+
+const handleSortChange = () => {
+  // Sorting logikasi bu yerda yoziladi
 }
 
 // Selects and Texts
@@ -366,19 +369,20 @@ const resetFilters = () => {
 
 .vacancies-container {
   font-family: 'Inter', sans-serif;
-  max-width: 1440px;
+  max-width: 1409px;
   margin: 0 auto;
 }
 
 .main-layout {
   display: flex;
+  justify-content: space-between; /* Formani o'ngga surish uchun */
   gap: 24px;
   align-items: flex-start; /* Fix 8: Added to make position sticky work correctly */
 }
 
 /* Left Column */
 .left-column {
-  width: 70%;
+  flex: 1; /* Qolgan barcha bo'sh joyni egallaydi, gap: 24px saqlanib qoladi */
 }
 
 .page-title {
@@ -390,9 +394,8 @@ const resetFilters = () => {
 
 .search-row {
   display: flex;
-  gap: 12px;
-  margin-top: 20px; /* FIX 1: Align search form top edge */
-  margin-bottom: 20px; /* FIX 2: Add small bottom gap below search form */
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .input-wrapper {
@@ -404,17 +407,15 @@ const resetFilters = () => {
 
 .search-icon {
   position: absolute;
-  left: 12px;
+  left: 16px;
 }
 
 .input-wrapper input {
   width: 100%;
-  height: 48px;
   border: 1px solid #D1D5DB;
   border-radius: 8px;
-  padding-left: 40px;
-  padding-right: 12px;
-  font-size: 14px;
+  padding: 14px 20px 14px 48px;
+  font-size: 18px;
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
@@ -425,14 +426,13 @@ const resetFilters = () => {
 }
 
 .search-btn {
-  width: 120px;
-  height: 48px;
   background: #00B5B5;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 18px;
+  padding: 14px 28px;
   cursor: pointer;
   transition: background 0.2s;
   font-family: inherit;
@@ -471,21 +471,28 @@ const resetFilters = () => {
 }
 
 .sort-dropdown {
-  display: flex;
-  align-items: center;
-  gap: 4px;
   color: #00B5B5;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 4px 24px 4px 8px;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%2300B5B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  font-family: inherit;
 }
 
 /* Right Column (Filter Panel) */
 .right-column {
-  width: 30%;
+  width: 22%;
   position: sticky;
-  top: 0; /* Fix 8: form must stick to the top of the viewport */
+  top: 24px; /* Updated top sticky position to avoid hugging the absolute edge */
   align-self: flex-start;
-  /* Fix 8: Removed max-height and overflow-y to unify page scroll */
+  margin-top: 70px; /* Align filter panel with the search button row */
 }
 
 /* Removed scrollbar styling since overflow is removed */
