@@ -35,7 +35,7 @@
         <div class="site-header__tail">
           <div class="site-header__actions-scroll">
             <div class="site-header__actions">
-              <button type="button" class="help-btn" :aria-label="text.helpAria">?</button>
+              <a href="https://t.me/quliyev_sanjar" target="_blank" rel="noopener noreferrer" class="help-btn" :aria-label="text.helpAria" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">?</a>
 
               <div ref="dropdownRef" class="lang-dropdown">
                 <button
@@ -319,7 +319,7 @@ onUnmounted(() => {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: clamp(1.2rem, 2.6vw, 2.4rem);
+  gap: clamp(0.5rem, 1vw, 1.2rem); /* Fix 4: Reduced spacing to move links closer to logo */
   min-width: 0;
   flex: 0 1 auto;
 }
@@ -343,8 +343,8 @@ onUnmounted(() => {
 .brand-logo {
   display: block;
   flex-shrink: 0;
-  width: clamp(2.15rem, 3.75vw, 2.5rem);
-  height: clamp(2.15rem, 3.75vw, 2.5rem);
+  width: clamp(2.25rem, 3.85vw, 2.6rem);
+  height: clamp(2.25rem, 3.85vw, 2.6rem);
 }
 
 .brand-text {
@@ -362,8 +362,8 @@ onUnmounted(() => {
   align-self: flex-start;
   width: var(--brand-copy-width);
   max-width: var(--brand-copy-width);
-  font-size: clamp(1.3rem, 1.05vw + 0.9rem, 1.6rem);
-  font-weight: 800;
+  font-size: clamp(1.7rem, 1.05vw + 0.9rem, 1.6rem);
+  font-weight: 900; /* Fix 2: Made brand text bolder */
   letter-spacing: -0.028em;
   color: var(--color-text);
   line-height: 1.12;
@@ -377,8 +377,8 @@ onUnmounted(() => {
   max-width: var(--brand-copy-width);
   min-width: var(--brand-copy-width);
   margin-top: 0.14em;
-  font-size: 7px;
-  font-weight: 500;
+  font-size: 9px; /* Fix 3: Increased slogan font size */
+  font-weight: 500; /* Fix 3: Made slogan slightly bolder */
   letter-spacing: 0.012em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -402,7 +402,7 @@ onUnmounted(() => {
   position: relative;
   display: inline-block;
   padding-bottom: 0.2em;
-  font-size: clamp(0.8125rem, 0.32vw + 0.7rem, 0.875rem);
+  font-size: clamp(0.9375rem, 0.32vw + 0.825rem, 1rem); /* Fix 4: Increased font size by ~2px */
   font-weight: 500;
   letter-spacing: -0.011em;
   color: var(--color-text-secondary);
@@ -435,10 +435,7 @@ onUnmounted(() => {
 }
 
 .nav-link--resumes {
-  color: var(--color-text-secondary);
-  font-weight: 600 !important;
-  font-size: 15px !important;
-  letter-spacing: -0.01em;
+  /* Fix 5: Removed specific styling so it inherits standard nav-link style and matches 'Tashkilotlar' */
 }
 
 .nav-link--resumes:hover {

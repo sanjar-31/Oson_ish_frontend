@@ -16,6 +16,7 @@ import VacanciesSection from '../components/Vacancies_section.vue';
 .vacancies-view {
   min-height: 100vh;
   background: #F9FAFB;
-  padding: 32px 16px;
+  padding: 0; /* Fix 1: Removed all outer page spacing */
+  margin: 0;
 }
 </style>

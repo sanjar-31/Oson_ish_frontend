@@ -373,6 +373,7 @@ const resetFilters = () => {
 .main-layout {
   display: flex;
   gap: 24px;
+  align-items: flex-start; /* Fix 8: Added to make position sticky work correctly */
 }
 
 /* Left Column */
@@ -384,12 +385,14 @@ const resetFilters = () => {
   font-size: 28px;
   font-weight: 700;
   color: #1A1A2E;
-  margin: 0 0 20px 0;
+  margin: 0 0 36px 0; /* Fix 7: Increased margin to move search form down */
 }
 
 .search-row {
   display: flex;
   gap: 12px;
+  margin-top: 20px; /* FIX 1: Align search form top edge */
+  margin-bottom: 20px; /* FIX 2: Add small bottom gap below search form */
 }
 
 .input-wrapper {
@@ -480,19 +483,12 @@ const resetFilters = () => {
 .right-column {
   width: 30%;
   position: sticky;
-  top: 20px;
+  top: 0; /* Fix 8: form must stick to the top of the viewport */
   align-self: flex-start;
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
+  /* Fix 8: Removed max-height and overflow-y to unify page scroll */
 }
 
-.right-column::-webkit-scrollbar {
-  width: 6px;
-}
-.right-column::-webkit-scrollbar-thumb {
-  background-color: #E5E7EB;
-  border-radius: 4px;
-}
+/* Removed scrollbar styling since overflow is removed */
 
 .filter-panel {
   background: #FFFFFF;
