@@ -123,6 +123,7 @@ export default {
   font-family: 'Inter', sans-serif;
   width: 100%;
   box-sizing: border-box;
+  border-radius: 16px 16px 0 0; /* Fix 9: Rounded top-left and top-right corners */
 }
 
 /* ── Section 1: Top Area ──────────────────────────────────── */
