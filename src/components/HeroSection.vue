@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -14,88 +14,26 @@ const showLocDropdown = ref(false)
 const profError = ref('')
 const locError = ref('')
 
+// Navigation for autocomplete
+const activeProfIndex = ref(-1)
+const activeLocIndex = ref(-1)
+
 let profDebounce = null
 let locDebounce = null
 
-// --- Mock AI Data ---
-const professionsList = [
-  'Dasturchi', 'Buxgalter', 'Menejer', 'Sotuvchi', 'Haydovchi', 'Oshpaz', 
-  'Hamshira', 'Shifokor', 'O\'qituvchi', 'Muhandis', 'Dizayner', 'Marketolog',
-  'Logist', 'Arxitektor', 'Huquqshunos', 'Iqtisodchi', 'Tarjimon', 'Jurnalist'
-]
+// --- Mock Data ---
+const professionsList = [] // Empty as requested, API not ready
+const allLocations = []    // Empty as requested, API not ready
 
-const allLocations = [
-  'Toshkent', 'Samarqand', 'Farg\'ona', 'Andijon', 'Namangan', 'Buxoro', 
-  'Xorazm', 'Qashqadaryo', 'Surxondaryo', 'Sirdaryo', 'Jizzax', 'Navoiy', 
-  'Qoraqalpog\'iston Respublikasi', 'Urganch', 'Qarshi', 'Termiz', 'Guliston', 
-  'Nukus', 'Chirchiq', 'Olmaliq', 'Angren', 'Bekobod', 'Marg\'ilon', 'Qo\'qon'
-]
-
-// --- Validation Utilities ---
-const FORBIDDEN_KEYWORDS = [
-  '<script', 'SELECT', 'DROP', 'INSERT', 'UPDATE', 'DELETE', 'OR', 'AND',
-  'eval', 'alert', 'document', 'window', 'onload', 'onerror'
-]
-
-const containsForbidden = (val) => FORBIDDEN_KEYWORDS.some(kw => val.toUpperCase().includes(kw.toUpperCase()))
-
-// --- Logic ---
-const validateProfession = (val) => {
-  if (containsForbidden(val)) {
-    profession.value = ''
-    profError.value = 'Noto\'g\'ri belgilar kiritildi'
-    return false
-  }
-  if (/[^a-zA-Zа-яА-ЯёЁuz\'\-\s0-9]/.test(val)) {
-    profession.value = val.replace(/[^a-zA-Zа-яА-ЯёЁuz\'\-\s0-9]/g, '')
-    return false
-  }
-  if (/(.)\1\1\1/.test(val)) return false
-  if (val.length > 100) profession.value = val.substring(0, 100)
-  
-  profError.value = ''
-  return true
-}
-
-const validateLocation = (val) => {
-  if (containsForbidden(val)) {
-    location.value = ''
-    locError.value = 'Noto\'g\'ri belgilar kiritildi'
-    return false
-  }
-  if (/[^a-zA-Zа-яА-ЯёЁuz\'\s]/.test(val)) {
-    location.value = val.replace(/[^a-zA-Zа-яА-ЯёЁuz\'\s]/g, '')
-    return false
-  }
-  if (val.length > 60) location.value = val.substring(0, 60)
-  
-  locError.value = ''
-  return true
-}
-
-const mockAI = (query, list, targetRef, dropdownRef, shortcuts = {}) => {
-  if (query.length < 2) {
-    targetRef.value = []
-    dropdownRef.value = false
-    return
-  }
-  const q = query.toLowerCase()
-  let results = []
-  Object.keys(shortcuts).forEach(key => {
-    if (q.includes(key)) results.push(shortcuts[key])
-  })
-  const filtered = list.filter(item => item.toLowerCase().includes(q) && !results.includes(item))
-  results = [...results, ...filtered].slice(0, 8)
-  targetRef.value = results
-  dropdownRef.value = results.length > 0
-}
-
-// --- Event Handlers ---
+// --- Autocomplete Logic ---
 const handleProfInput = (e) => {
   const val = e.target.value
-  if (validateProfession(val)) {
-    clearTimeout(profDebounce)
-    profDebounce = setTimeout(() => mockAI(val, professionsList, profResults, showProfDropdown, { 'prog': 'Dasturchi', 'bux': 'Buxgalter' }), 300)
+  profession.value = val
+  activeProfIndex.value = -1
+  // Mock logic for future API connection
+  if (val.length >= 2) {
+    // profResults.value = professionsList.filter(p => p.toLowerCase().includes(val.toLowerCase())).slice(0, 8)
+    // showProfDropdown.value = profResults.value.length > 0
   } else {
     profResults.value = []
     showProfDropdown.value = false
@@ -104,60 +42,71 @@ const handleProfInput = (e) => {
 
 const handleLocInput = (e) => {
   const val = e.target.value
-  if (validateLocation(val)) {
-    clearTimeout(locDebounce)
-    locDebounce = setTimeout(() => mockAI(val, allLocations, locResults, showLocDropdown, { 'tosh': 'Toshkent', 'sam': 'Samarqand', 'farg': 'Farg\'ona' }), 300)
+  location.value = val
+  activeLocIndex.value = -1
+  // Mock logic for future API connection
+  if (val.length >= 2) {
+    // locResults.value = allLocations.filter(l => l.toLowerCase().includes(val.toLowerCase())).slice(0, 8)
+    // showLocDropdown.value = locResults.value.length > 0
   } else {
     locResults.value = []
     showLocDropdown.value = false
   }
 }
 
-const handleProfFocus = () => {
-  if (profResults.value.length) showProfDropdown.value = true
+const handleProfKeydown = (e) => {
+  if (!showProfDropdown.value) return
+  if (e.key === 'ArrowDown') {
+    activeProfIndex.value = (activeProfIndex.value + 1) % profResults.value.length
+  } else if (e.key === 'ArrowUp') {
+    activeProfIndex.value = (activeProfIndex.value - 1 + profResults.value.length) % profResults.value.length
+  } else if (e.key === 'Enter' && activeProfIndex.value >= 0) {
+    handleProfSelect(profResults.value[activeProfIndex.value])
+  } else if (e.key === 'Escape') {
+    showProfDropdown.value = false
+  }
 }
 
-const handleLocFocus = () => {
-  if (locResults.value.length) showLocDropdown.value = true
+const handleLocKeydown = (e) => {
+  if (!showLocDropdown.value) return
+  if (e.key === 'ArrowDown') {
+    activeLocIndex.value = (activeLocIndex.value + 1) % locResults.value.length
+  } else if (e.key === 'ArrowUp') {
+    activeLocIndex.value = (activeLocIndex.value - 1 + locResults.value.length) % locResults.value.length
+  } else if (e.key === 'Enter' && activeLocIndex.value >= 0) {
+    handleLocSelect(locResults.value[activeLocIndex.value])
+  } else if (e.key === 'Escape') {
+    showLocDropdown.value = false
+  }
 }
 
 const handleProfSelect = (val) => {
   profession.value = val
   showProfDropdown.value = false
-  profError.value = ''
+  activeProfIndex.value = -1
 }
 
 const handleLocSelect = (val) => {
   location.value = val
   showLocDropdown.value = false
-  locError.value = ''
+  activeLocIndex.value = -1
 }
 
 const handleSearch = () => {
-  let valid = true
-  if (profession.value.trim().length < 2) {
-    profError.value = 'Minimal 2 ta harf kiritilishi shart'
-    valid = false
-  }
-  if (location.value.trim().length < 2) {
-    locError.value = 'Minimal 2 ta harf kiritilishi shart'
-    valid = false
-  }
-  if (location.value && !allLocations.includes(location.value)) {
-    locError.value = 'Faqat ro\'yxatdagi hududlarni tanlang'
-    valid = false
-  }
-  if (valid) router.push('/search')
+  router.push('/search')
 }
-
-
 
 onUnmounted(() => {
   clearTimeout(profDebounce)
   clearTimeout(locDebounce)
 })
 
-const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafers', 'MEDIAPARK', 'elmakon', 'AgroBaza']
+const brands = ['elmakon', 'AgroBaza', 'alif shop', 'uzum', 'artel', 'korzinka', 'asaxiy']
+
+// Stats navigation
+const navigateTo = (path) => {
+  router.push(path)
+}
 </script>
 
 <template>
@@ -165,6 +114,7 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
     <div class="hero-overlay"></div>
 
     <div class="container">
+      <!-- Top Right Banner -->
       <div class="top-banner">
         <p>Ish qidiruvchi va ish beruvchilar uchun<br>platformadan foydalanish bepul</p>
       </div>
@@ -174,9 +124,10 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
           Ish beruvchi va ish qidiruvchilar uchun<br>ishonchli raqamli platforma!
         </h1>
 
+        <!-- Search Panel -->
         <div class="search-panel">
           <div class="input-group">
-            <div class="input-wrapper" :class="{ 'has-error': profError }">
+            <div class="input-wrapper">
               <span class="icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -187,24 +138,24 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
                 v-model="profession" 
                 placeholder="Kasb, lavozim nomi" 
                 @input="handleProfInput"
-                @focus="handleProfFocus"
+                @keydown="handleProfKeydown"
+                @focus="showProfDropdown = profResults.length > 0"
               />
             </div>
             <div v-if="showProfDropdown" class="dropdown">
               <div 
-                v-for="res in profResults" 
+                v-for="(res, index) in profResults" 
                 :key="res" 
-                class="dropdown-item"
+                :class="['dropdown-item', { active: index === activeProfIndex }]"
                 @click="handleProfSelect(res)"
               >
                 {{ res }}
               </div>
             </div>
-            <p v-if="profError" class="error-msg">{{ profError }}</p>
           </div>
 
           <div class="input-group">
-            <div class="input-wrapper" :class="{ 'has-error': locError }">
+            <div class="input-wrapper">
               <span class="icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
@@ -215,7 +166,8 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
                 v-model="location" 
                 placeholder="O'zbekiston bo'ylab" 
                 @input="handleLocInput"
-                @focus="handleLocFocus"
+                @keydown="handleLocKeydown"
+                @focus="showLocDropdown = locResults.length > 0"
               />
               <span class="chevron">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -225,68 +177,78 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
             </div>
             <div v-if="showLocDropdown" class="dropdown">
               <div 
-                v-for="res in locResults" 
+                v-for="(res, index) in locResults" 
                 :key="res" 
-                class="dropdown-item"
+                :class="['dropdown-item', { active: index === activeLocIndex }]"
                 @click="handleLocSelect(res)"
               >
                 {{ res }}
               </div>
             </div>
-            <p v-if="locError" class="error-msg">{{ locError }}</p>
           </div>
 
           <button class="btn-search" @click="handleSearch">Qidirish</button>
         </div>
 
-        <div class="spacer"></div>
-        <hr class="divider" />
-
-        <div class="warning-banner-container">
-          <div class="warning-banner">
-            Iltimos, saytga to'g'ri ma'lumot kiriting. Boshqalar vaqtini hurmat qiling.
-          </div>
+        <!-- Warning text and divider in correct order -->
+        <div class="warning-section">
+          <p class="warning-text">Iltimos, saytga to'g'ri ma'lumot kiriting. Boshqalar vaqtini hurmat qiling.</p>
+          <hr class="thin-divider" />
         </div>
 
-        <div class="nav-buttons">
-          <div class="nav-left">
-            <router-link to="/resume/create" class="nav-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Bottom Layout -->
+        <div class="hero-bottom">
+          <!-- Stats on bottom left -->
+          <div class="stats-group">
+            <div class="stat-card" @click="navigateTo('/vacancies')">
+              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+              <div class="stat-content">
+                <span class="stat-number">46634</span>
+                <span class="stat-label">Vakansiyalar</span>
+              </div>
+            </div>
+            <div class="stat-card" @click="navigateTo('/resumes')">
+              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <div class="stat-content">
+                <span class="stat-number">163695</span>
+                <span class="stat-label">Rezyumelar</span>
+              </div>
+            </div>
+            <div class="stat-card" @click="navigateTo('/companies')">
+              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7M4 21V7m16 14V7"/>
+              </svg>
+              <div class="stat-content">
+                <span class="stat-number">28919</span>
+                <span class="stat-label">Tashkilotlar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action buttons on bottom right -->
+          <div class="action-buttons">
+            <router-link to="/resume/create" class="action-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
               </svg>
               Rezyume joylash
             </router-link>
-            <router-link to="/vacancy/create" class="nav-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <router-link to="/vacancy/create" class="action-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
               </svg>
               Vakansiya joylash
-            </router-link>
-            <router-link to="/statistics" class="nav-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-              </svg>
-              Statistika
-            </router-link>
-          </div>
-          <div class="nav-right">
-            <router-link to="/help" class="nav-btn light">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-              Yordam
-            </router-link>
-            <router-link to="/about" class="nav-btn light">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-              </svg>
-              Biz haqimizda
             </router-link>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Carousel Section -->
     <div class="brand-carousel">
       <div class="carousel-track">
         <div v-for="brand in [...brands, ...brands]" :key="brand" class="brand-item">
@@ -307,6 +269,7 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   padding-top: 60px;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
+  border-radius: 16px 16px 0 0; /* Increased top rounding */
 }
 
 .hero-overlay {
@@ -350,7 +313,7 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
 .hero-title {
   color: white;
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 800; /* Bold geometric sans-serif */
   line-height: 1.2;
   margin-bottom: 40px;
 }
@@ -359,6 +322,7 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   display: flex;
   gap: 12px;
   align-items: flex-start;
+  margin-bottom: 30px;
 }
 
 .input-group {
@@ -376,10 +340,6 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   transition: all 0.2s;
 }
 
-.input-wrapper.has-error {
-  border: 1px solid #F43F5E;
-}
-
 .input-wrapper .icon {
   color: #9CA3AF;
   margin-right: 12px;
@@ -393,6 +353,7 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   flex: 1;
   font-size: 16px;
   color: #111827;
+  font-weight: 500;
 }
 
 .input-wrapper input::placeholder {
@@ -424,19 +385,12 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   color: #374151;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover, .dropdown-item.active {
   background: #F3F4F6;
 }
 
-.error-msg {
-  color: #F43F5E;
-  font-size: 12px;
-  margin-top: 6px;
-  position: absolute;
-}
-
 .btn-search {
-  background: #00A3BF;
+  background: #00BCD4; /* Updated primary teal */
   color: white;
   border: none;
   height: 56px;
@@ -448,74 +402,123 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   transition: transform 0.1s, opacity 0.2s;
 }
 
-.btn-search:hover {
-  opacity: 0.9;
+.warning-section {
+  margin-top: 20px;
 }
 
-.btn-search:active {
-  transform: scale(0.98);
-}
-
-.spacer {
-  height: 150px;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 0;
-}
-
-.warning-banner-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -20px;
-}
-
-.warning-banner {
+.warning-text {
   background: #C84E5A;
   color: white;
   padding: 8px 20px;
   border-radius: 8px;
   font-size: 13px;
-  margin-top: 40px;
+  font-weight: 500;
+  display: inline-block;
 }
 
-.nav-buttons {
+.warning-section {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.thin-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.hero-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 60px;
 }
 
-.nav-left, .nav-right {
+.stats-group {
   display: flex;
-  gap: 12px;
+  gap: 30px;
 }
 
-.nav-btn {
+.stat-card {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #E5F6F8;
-  color: #006B7D;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.nav-btn.light {
-  background: rgba(255, 255, 255, 0.1);
+  gap: 12px;
   color: white;
-  backdrop-filter: blur(5px);
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
 }
 
-.nav-btn:hover {
-  opacity: 0.9;
+.stat-icon {
+  opacity: 0.8;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Hover Effect for Stats - Frosted glass style */
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.stat-card:hover .stat-content {
+  flex-direction: column;
+}
+
+/* Screenshot 4 style: rounded box appearance with icon on top */
+@media (min-width: 768px) {
+  .stat-card:hover {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    min-width: 140px;
+  }
+  .stat-card:hover .stat-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    opacity: 1;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(229, 246, 248, 0.9);
+  color: #006B7D;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
 }
 
 .brand-carousel {
@@ -523,11 +526,10 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(17, 24, 39, 0.4);
-  backdrop-filter: blur(10px);
-  padding: 20px 0;
+  background: #1a2332; /* Dark navy background */
+  padding: 24px 0;
   z-index: 2;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-radius: 0 0 12px 12px; /* Corner rounding as requested */
 }
 
 .carousel-track {
@@ -536,23 +538,22 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   animation: scroll 30s linear infinite;
 }
 
+/* Auto-scroll behavior: continue scrolling even when hovered */
 .brand-carousel:hover .carousel-track {
-  animation-play-state: paused;
+  animation-play-state: running; /* Explicitly keep running */
 }
 
 .brand-item {
-  padding: 0 40px;
+  padding: 0 50px;
   display: flex;
   align-items: center;
 }
 
 .brand-name {
   color: white;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 @keyframes scroll {
@@ -567,12 +568,14 @@ const brands = ['artel', 'korzinka', 'asaxiy', 'paynet', 'baraka market', 'Crafe
   .input-group, .btn-search {
     width: 100%;
   }
-  .nav-buttons {
+  .hero-bottom {
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 40px;
   }
-  .hero-title {
-    font-size: 32px;
+  .stats-group {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 </style>
