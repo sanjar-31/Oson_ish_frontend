@@ -311,7 +311,7 @@ onUnmounted(() => {
   align-items: center;
   gap: clamp(1.35rem, 3vw, 2.6rem);
   min-height: calc(clamp(3.65rem, 5.5vw, 4.25rem) + 20px);
-  padding-inline: var(--header-pad-x);
+  padding-inline: 24px;
   padding-block: clamp(0.35rem, 1vw, 0.6rem);
 }
 
@@ -577,14 +577,15 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   height: clamp(2.15rem, 4vw, 2.45rem);
-  min-width: clamp(5.25rem, 18vw, 6.25rem);
-  padding-inline: clamp(1.1rem, 3vw, 1.45rem);
+  min-width: 90px;
+  padding-inline: 16px;
   border: 1px solid var(--color-teal);
   border-radius: 10px;
   background: var(--color-teal);
   color: #fff;
   font-size: clamp(0.9375rem, 0.32vw + 0.82rem, 1rem);
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s ease;
   white-space: nowrap;
