@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Resumes from '@/views/Resumes.vue'
 import ComingSoon from '@/pages/ComingSoon.vue'
 import Vacancies from '@/views/Vacancies.vue'
+import Login from '@/views/Login.vue'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
         path: '/vacancies',
         name: 'Vacancies',
         component: Vacancies
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
     },
     {
         path: '/resume/create',
