@@ -85,7 +85,7 @@
                 </svg>
               </router-link>
 
-              <router-link to="/register" class="login-btn">
+              <router-link to="/login" class="login-btn">
                 {{ text.login }}
               </router-link>
             </div>
