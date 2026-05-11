@@ -1,7 +1,9 @@
 <template>
   <div class="login-page">
     <Header />
-    <LoginSection />
+    <main class="login-content">
+      <LoginSection />
+    </main>
     <Footer />
   </div>
 </template>
@@ -14,7 +16,9 @@ import Footer from '@/components/Footer.vue'
 export default {
   name: 'Login',
   components: {
-    LoginSection
+    Header,
+    LoginSection,
+    Footer
   }
 }
 </script>
@@ -24,13 +28,19 @@ export default {
   min-height: 100vh;
   background: #f0f2f5;
   display: flex;
+  flex-direction: column;
+}
+
+.login-content {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
 }
 
 @media (max-width: 768px) {
-  .login-page {
+  .login-content {
     padding: 16px;
     align-items: flex-start;
   }
