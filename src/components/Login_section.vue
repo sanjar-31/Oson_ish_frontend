@@ -53,8 +53,9 @@
         </div>
 
         <!-- Right Column: Registration Form -->
-        <transition name="fade-slide">
-          <div v-if="selectedRole" class="form-section">
+        <transition name="fade-slide" mode="out-in">
+          <!-- Job Seeker Form -->
+          <div v-if="selectedRole === 'seeker'" key="seeker" class="form-section">
             <div class="divider-v"></div>
             <div class="form-content">
               <h2 class="form-title">Ro'yxatdan o'tish</h2>
@@ -153,28 +154,111 @@
                     </svg>
                     <span>Google</span>
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  <button class="social-auth-btn eri-auth">
-                    <div class="auth-icon eri-logo">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00a3bf" stroke-width="2">
-                        <path d="M15 7a2 2 0 0 1 2 2m4 0a6 6 0 0 1-7.74 5.74L11 17H9v2H7v2H4a1 1 0 0 1-1-1v-3l3.26-3.26A6 6 0 1 1 21 9z" />
-                      </svg>
+          <!-- Employer Form -->
+          <div v-else-if="selectedRole === 'employer'" key="employer" class="form-section">
+            <div class="divider-v"></div>
+            <div class="form-content">
+              <h2 class="form-title">Ro'yxatdan o'tish</h2>
+              
+              <div class="tabs-wrapper">
+                <div class="tabs">
+                  <button 
+                    class="tab-btn" 
+                    :class="{ 'active': activeTab === 'phone' }"
+                    @click="switchTab('phone')"
+                  >
+                    Telefon raqami
+                  </button>
+                  <button 
+                    class="tab-btn" 
+                    :class="{ 'active': activeTab === 'email' }"
+                    @click="switchTab('email')"
+                  >
+                    Elektron pochta
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-body">
+                <transition name="fade-fast" mode="out-in">
+                  <!-- Phone Form Content -->
+                  <div v-if="activeTab === 'phone'" key="phone" class="tab-pane">
+                    <div class="input-container">
+                      <label class="label">Telefon raqami</label>
+                      <div class="phone-box" :class="{ 'error': phoneError, 'success': isPhoneComplete }">
+                        <div class="phone-prefix">
+                          <span class="flag">🇺🇿</span>
+                          <span class="code">+998</span>
+                        </div>
+                        <input 
+                          type="text" 
+                          v-model="phone"
+                          @input="handlePhoneInput"
+                          placeholder="— — — — — — —"
+                          class="phone-field"
+                        />
+                      </div>
+                      <p v-if="phoneError" class="error-msg">{{ phoneError }}</p>
                     </div>
-                    <span>ERI orqali kirish</span>
+
+                    <div class="input-container">
+                      <label class="label">Kodni olish usuli</label>
+                      <div class="radio-row">
+                        <label class="radio-item">
+                          <input type="radio" v-model="codeMethod" value="sms" name="method">
+                          <span class="radio-dot"></span>
+                          <span class="radio-text">SMS-kod</span>
+                        </label>
+                        <label class="radio-item">
+                          <input type="radio" v-model="codeMethod" value="telegram" name="method">
+                          <span class="radio-dot"></span>
+                          <span class="radio-text">Telegram-kod</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Email Form Content -->
+                  <div v-else key="email" class="tab-pane">
+                    <div class="input-container">
+                      <label class="label">Elektron pochta</label>
+                      <input 
+                        type="email" 
+                        v-model="email"
+                        @input="handleEmailInput"
+                        placeholder="example@email.com"
+                        class="email-field"
+                        :class="{ 'error': emailError, 'success': isEmailValidFormat && email.length > 0 }"
+                      />
+                      <p v-if="emailError" class="error-msg">{{ emailError }}</p>
+                    </div>
+                  </div>
+                </transition>
+
+                <!-- Actions Section -->
+                <div class="actions-stack">
+                  <button class="primary-btn" @click="handleSendCode">
+                    Kodni yuborish
                   </button>
 
-                  <div class="info-notice">
-                    <div class="info-icon-box">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                      </svg>
-                    </div>
-                    <p class="info-text">
-                      Yuqoridagi usullar orqali kirsangiz, hisobingiz tasdiqlanmagan bo'ladi. To'liq imkoniyatlar uchun e-imzo orqali tasdiqlang.
-                    </p>
+                  <div class="text-divider">
+                    <span class="divider-text">yoki</span>
                   </div>
+
+                  <button class="social-auth-btn google-auth">
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    <span>Google</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -292,24 +376,24 @@ export default {
   
   width: 100%;
   max-width: 460px;
-  margin: 0 auto;
+  margin: 50px auto 300px;
   font-family: 'Inter', sans-serif;
   transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .login-container.expanded {
-  max-width: 1160px;
+  max-width: 1040px;
 }
 
 .expanded .login-grid {
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 330px 1fr;
 }
 
 .login-card {
   background: var(--color-bg-card);
   border-radius: 24px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
-  padding: 32px 40px;
+  padding: 24px 40px 32px;
   min-height: auto;
 }
 
@@ -320,9 +404,6 @@ export default {
   transition: all 0.4s ease;
 }
 
-.expanded .login-grid {
-  grid-template-columns: 1fr 1fr;
-}
 
 /* Titles */
 .section-title {
@@ -386,7 +467,7 @@ export default {
 }
 
 .role-text {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--color-text-dark);
 }
@@ -403,7 +484,7 @@ export default {
 .divider-v {
   width: 1px;
   background: #f1f5f9;
-  margin: 0 48px;
+  margin: 0 32px;
 }
 
 .form-content {
