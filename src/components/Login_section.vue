@@ -482,8 +482,8 @@ export default {
 }
 
 .divider-v {
-  width: 1px;
-  background: #f1f5f9;
+  width: 2px;
+  background: #cbd5e1;
   margin: 0 32px;
 }
 
@@ -678,7 +678,7 @@ export default {
 .text-divider::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 2px solid #cbd5e1;
 }
 
 .divider-text {

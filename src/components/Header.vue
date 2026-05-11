@@ -190,6 +190,7 @@ const FALLBACK_TEXT = {
   mainNav: 'Main navigation',
 }
 
+
 const props = defineProps({
   t: { type: Object, default: () => ({}) },
   lang: { type: String, default: 'uz' },
