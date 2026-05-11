@@ -141,7 +141,7 @@
                   </button>
 
                   <div class="text-divider">
-                    <span class="divider-text">yaki</span>
+                    <span class="divider-text">yoki</span>
                   </div>
 
                   <button class="social-auth-btn google-auth">
@@ -154,9 +154,14 @@
                     <span>Google</span>
                   </button>
 
-                  <div class="text-divider">
-                    <span class="divider-text">yoki e-imzo orqali</span>
-                  </div>
+                  <button class="social-auth-btn eri-auth">
+                    <div class="auth-icon eri-logo">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00a3bf" stroke-width="2">
+                        <path d="M15 7a2 2 0 0 1 2 2m4 0a6 6 0 0 1-7.74 5.74L11 17H9v2H7v2H4a1 1 0 0 1-1-1v-3l3.26-3.26A6 6 0 1 1 21 9z" />
+                      </svg>
+                    </div>
+                    <span>ERI orqali kirish</span>
+                  </button>
 
                   <div class="info-notice">
                     <div class="info-icon-box">
@@ -170,25 +175,6 @@
                       Yuqoridagi usullar orqali kirsangiz, hisobingiz tasdiqlanmagan bo'ladi. To'liq imkoniyatlar uchun e-imzo orqali tasdiqlang.
                     </p>
                   </div>
-
-                  <button class="social-auth-btn oneid-auth">
-                    <div class="auth-icon oneid-logo">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" fill="#00a3bf" />
-                        <path d="M11 17h2v-6h-2v6zm0-8h2V7h-2v2z" fill="white" />
-                      </svg>
-                    </div>
-                    <span>OneID orqali kirish</span>
-                  </button>
-
-                  <button class="social-auth-btn eri-auth">
-                    <div class="auth-icon eri-logo">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00a3bf" stroke-width="2">
-                        <path d="M15 7a2 2 0 0 1 2 2m4 0a6 6 0 0 1-7.74 5.74L11 17H9v2H7v2H4a1 1 0 0 1-1-1v-3l3.26-3.26A6 6 0 1 1 21 9z" />
-                      </svg>
-                    </div>
-                    <span>ERI orqali kirish</span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -312,15 +298,19 @@ export default {
 }
 
 .login-container.expanded {
-  max-width: 960px;
+  max-width: 1160px;
+}
+
+.expanded .login-grid {
+  grid-template-columns: 350px 1fr;
 }
 
 .login-card {
   background: var(--color-bg-card);
   border-radius: 24px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
-  padding: 40px;
-  min-height: 500px;
+  padding: 32px 40px;
+  min-height: auto;
 }
 
 .login-grid {
