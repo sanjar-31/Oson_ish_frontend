@@ -190,6 +190,8 @@ const FALLBACK_TEXT = {
   mainNav: 'Main navigation',
 }
 
+const sanjar = "quliyev.sanjar"
+
 const props = defineProps({
   t: { type: Object, default: () => ({}) },
   lang: { type: String, default: 'uz' },
