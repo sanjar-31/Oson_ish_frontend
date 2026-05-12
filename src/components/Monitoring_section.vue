@@ -175,9 +175,9 @@ const getColWidth = (index) => {
 }
 
 .page-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 24px;
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 30px;
   color: #111827;
   letter-spacing: -0.01em;
 }
@@ -194,7 +194,7 @@ const getColWidth = (index) => {
 }
 
 .tab-item {
-  padding: 0 0 12px 0;
+  padding: 0 16px 12px 16px;
   font-size: 15px;
   font-weight: 500;
   color: #9ca3af;
@@ -225,8 +225,8 @@ const getColWidth = (index) => {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
-  background-color: #f1f5f9;
+  height: 2px;
+  background-color: #cbd5e1;
   z-index: 1;
 }
 
@@ -248,6 +248,7 @@ const getColWidth = (index) => {
 .search-box {
   position: relative;
   width: 220px;
+  flex-shrink: 0;
 }
 
 .search-icon {
@@ -260,7 +261,8 @@ const getColWidth = (index) => {
 }
 
 .filter-input {
-  width: 100%;
+  box-sizing: border-box;
+  width: 220px;
   height: 46px;
   padding: 0 16px 0 42px;
   background: #f8fafc;
@@ -281,12 +283,12 @@ const getColWidth = (index) => {
   background: #fff;
 }
 
-.select-box, .custom-select {
+.select-box {
   position: relative;
   min-width: 175px;
 }
 
-.filter-select, .custom-select {
+.filter-select {
   width: 100%;
   height: 46px;
   padding: 0 40px 0 16px;
@@ -297,6 +299,17 @@ const getColWidth = (index) => {
   color: #6b7280;
   outline: none;
   appearance: none;
+  cursor: pointer;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  padding: 0 40px 0 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -337,9 +350,9 @@ const getColWidth = (index) => {
 /* Table Card */
 .table-card {
   background: #ffffff;
-  border: 1px solid #f1f5f9;
+  border: 2px solid #d1d5db;
   border-radius: 20px;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
@@ -354,12 +367,12 @@ const getColWidth = (index) => {
 
 .monitoring-table th {
   padding: 32px 20px;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 500;
   color: #9ca3af;
   text-align: center;
   line-height: 1.5;
-  border-bottom: 1px solid #f8fafc;
+  border-bottom: 2px solid #cbd5e1;
 }
 
 .monitoring-table th:first-child {
