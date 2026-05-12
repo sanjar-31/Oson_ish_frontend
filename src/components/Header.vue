@@ -71,7 +71,7 @@
                 </div>
               </div>
 
-              <router-link to="/saved" class="heart-link">
+              <router-link to="/monitoring" class="heart-link">
                 <svg
                   width="22"
                   height="22"
