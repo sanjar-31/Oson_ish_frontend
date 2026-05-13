@@ -350,6 +350,8 @@ const getColWidth = (index) => {
   color: #9ca3af;
   white-space: nowrap;
   flex-shrink: 0;
+  align-self: flex-end;
+  padding-bottom: 0px;
 }
 
 .stats-bold {
@@ -743,52 +745,62 @@ const getColWidth = (index) => {
     margin-bottom: 20px;
   }
 
-  /* Filters: 2×2 grid */
+  /* Filters: full-width stack */
   .filters-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
   }
 
   .left-filters {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .left-filters > div {
+    margin-bottom: 12px !important;
   }
 
   .search-box {
-    width: 100%;
-    grid-column: span 1;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
   }
 
   .filter-input {
-    width: 100%;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
     height: 46px;
     font-size: 13.5px;
+    box-sizing: border-box;
   }
 
-  .select-box {
-    min-width: unset;
-    width: 100%;
-  }
-
+  .select-box,
   .dynamic-select {
-    min-width: unset;
-    width: 100%;
-    grid-column: span 1;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
   }
 
   .filter-select,
   .custom-select {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
     height: 46px;
     font-size: 13.5px;
-    width: 100%;
+    box-sizing: border-box;
   }
 
   .right-info {
+    display: block !important;
+    width: 100% !important;
     font-size: 12px;
-    text-align: right;
-    white-space: normal;
+    text-align: center !important;
+    white-space: normal !important;
+    margin-top: 12px !important;
   }
 
   /* Table: scrollable with shadow hint */
@@ -839,155 +851,29 @@ const getColWidth = (index) => {
 }
 
 /* ============================================================
-   LARGE MOBILE (376px — 480px)
+   ALL MOBILE DEVICES (480px and below)
    ============================================================ */
-@media (min-width: 376px) and (max-width: 480px) {
+@media (max-width: 480px) {
   .monitoring-container {
-    padding: 18px 16px;
-  }
-
-  .page-title {
-    font-size: 20px;
-    margin-bottom: 18px;
-  }
-
-  /* Tabs: compact side-by-side, scale text */
-  .tabs-list {
-    gap: 6px;
-  }
-
-  .tab-item {
-    font-size: 12px;
-    padding: 0 6px 9px 6px;
-  }
-
-  .tabs-nav {
-    margin-bottom: 18px;
-  }
-
-  /* Filters: full-width stack */
-  .filters-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .left-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .search-box {
+    padding: 16px 14px;
     width: 100%;
-  }
-
-  .filter-input {
-    width: 100%;
-    height: 48px;
-    font-size: 14px;
-    border-radius: 12px;
-  }
-
-  .select-box {
-    min-width: unset;
-    width: 100%;
-  }
-
-  .dynamic-select {
-    min-width: unset;
-    width: 100%;
-  }
-
-  .filter-select,
-  .custom-select {
-    height: 48px;
-    font-size: 14px;
-    width: 100%;
-    border-radius: 12px;
-  }
-
-  .placeholder-label {
-    font-size: 14px;
-  }
-
-  .right-info {
-    font-size: 11.5px;
-    text-align: right;
-    white-space: normal;
-  }
-
-  /* Table: scrollable with fade hint */
-  .table-card {
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .table-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 36px;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(203, 213, 225, 0.4));
-    pointer-events: none;
-    border-radius: 0 12px 12px 0;
-  }
-
-  .monitoring-table {
-    min-width: 640px;
-  }
-
-  .monitoring-table th {
-    padding: 18px 10px;
-    font-size: 11.5px;
-  }
-
-  .monitoring-table th:first-child {
-    padding-left: 14px;
-  }
-
-  .monitoring-table th:last-child {
-    padding-right: 14px;
-  }
-
-  .empty-state {
-    padding: 60px 0;
-    font-size: 13px;
-  }
-}
-
-/* ============================================================
-   SMALL MOBILE (375px and below)
-   ============================================================ */
-@media (max-width: 375px) {
-  .monitoring-container {
-    padding: 14px 12px;
-    /* Guarantee no element punches past the viewport */
-    width: 100%;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
     box-sizing: border-box;
   }
 
-  /* ── Title ── */
   .page-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     margin-bottom: 16px;
-    /* Never let it overflow */
     word-break: break-word;
     overflow-wrap: break-word;
+    width: 100%;
   }
 
-  /* ── Tabs: stack vertically ── */
+  /* -- Tabs (BUG 3 FIX) -- */
   .tabs-nav {
-    position: relative;   /* MUST stay relative — divider is absolute inside it */
+    position: relative;
     margin-bottom: 16px;
     padding-bottom: 2px;
     width: 100%;
@@ -997,23 +883,26 @@ const getColWidth = (index) => {
 
   .tabs-list {
     display: flex;
-    flex-direction: column;   /* stack vertically */
-    align-items: stretch;     /* each button full width */
+    flex-direction: column;   /* Force vertical stack */
+    align-items: flex-start;
     gap: 0;
     width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .tab-item {
     width: 100%;
-    padding: 10px 0 14px 0;         /* 14px bottom gives space for 2px indicator */
-    font-size: 13px;
+    padding: 12px 0 14px 0;
+    font-size: 14px;
     font-weight: 500;
-    white-space: normal !important; /* override base nowrap */
+    white-space: normal !important; 
     word-break: break-word;
-    text-align: left;
+    text-align: left !important;
     letter-spacing: 0;
     position: relative;
     box-sizing: border-box;
+    justify-content: flex-start;
   }
 
   .tab-indicator {
@@ -1027,7 +916,6 @@ const getColWidth = (index) => {
     z-index: 2;
   }
 
-  /* tabs-divider stays absolute — anchors to tabs-nav (position:relative) */
   .tabs-divider {
     position: absolute;
     bottom: 0;
@@ -1038,42 +926,49 @@ const getColWidth = (index) => {
     z-index: 1;
   }
 
-  /* ── Filters: every element full-width, vertical stack ── */
+  /* -- Filters Row (BUG 1 & 2 FIX) -- */
   .filters-row {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    margin-bottom: 20px;
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 24px !important;
   }
 
   .left-filters {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Search box wrapper — must be block-level full width */
-  .search-box {
-    display: block;
-    width: 100% !important;   /* override base 220px */
-    min-width: 0 !important;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    position: relative;
+  .left-filters > div {
+    margin-bottom: 12px !important;
   }
 
-  /* Input fills wrapper exactly */
-  .filter-input {
-    display: block;
-    width: 100% !important;   /* fill wrapper, not the base 220px */
+  /* Force every input and select to exactly 100% width */
+  .search-box,
+  .select-box,
+  .dynamic-select {
+    display: block !important;
+    width: 100% !important;
     min-width: 0 !important;
-    height: 48px;
-    font-size: 14px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    text-overflow: ellipsis;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .filter-input,
+  .filter-select,
+  .custom-select {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    font-size: 14px !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
   }
 
   .filter-input::placeholder {
@@ -1082,77 +977,50 @@ const getColWidth = (index) => {
     white-space: nowrap;
   }
 
-  /* BUG 1 FIX: All select wrappers — same full width, cancel every inherited min-width */
-  .select-box {
-    min-width: 0 !important;   /* override base 175px */
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .dynamic-select {
-    min-width: 0 !important;   /* override base 240px */
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* BUG 1 FIX: Selects fill their wrappers exactly */
-  .filter-select {
-    width: 100%;
-    min-width: 0;
-    height: 48px;
-    font-size: 14px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    text-overflow: ellipsis;
-  }
-
-  .custom-select {
-    width: 100%;
-    min-width: 0;
-    height: 48px;
-    font-size: 14px;
-    border-radius: 10px;
-    box-sizing: border-box;
-  }
-
   .placeholder-label {
     font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 32px); /* leave room for chevron icon */
+    max-width: calc(100% - 32px);
   }
 
-  /* Info text — must never overflow */
+  /* -- Info Text (BUG 2 FIX) -- */
   .right-info {
-    font-size: 11.5px;
-    text-align: center;
-    white-space: normal !important;   /* override base white-space:nowrap */
-    flex-shrink: 1 !important;        /* override base flex-shrink:0 */
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    line-height: 1.5;
+    display: block !important;
+    width: 100% !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.5 !important;
+    margin: 16px 0 0 0 !important;
+    padding: 0 !important;
+    clear: both !important;
   }
 
-  /* ── Table: scrollable container with right-edge fade hint ── */
+  /* -- Table Container -- */
   .table-card {
-    border-radius: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 12px;
     position: relative;
-    overflow: hidden;  /* clips the ::after fade overlay */
+    overflow: hidden !important; 
+    box-sizing: border-box !important;
   }
 
   .table-wrapper {
-    overflow-x: auto;
+    width: 100% !important;
+    overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
-    /* Scrollbar always accessible but thin */
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
   }
 
-  /* Right-edge gradient fade = "scroll hint" */
+  .monitoring-table {
+    min-width: 600px; /* Keep this so table scrolls, but wrapper must hide overflow */
+  }
+
   .table-card::after {
     content: '';
     position: absolute;
@@ -1160,37 +1028,28 @@ const getColWidth = (index) => {
     right: 0;
     width: 36px;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(203, 213, 225, 0.5));
+    background: linear-gradient(to right, transparent, rgba(203, 213, 225, 0.4));
     pointer-events: none;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 12px 12px 0;
     z-index: 3;
   }
 
-  /* Table itself has a minimum width so columns don't crush */
-  .monitoring-table {
-    min-width: 580px;
-  }
-
   .monitoring-table th {
-    padding: 14px 8px;
-    font-size: 11px;
-    line-height: 1.4;
-    white-space: normal;  /* let header text wrap inside its cell */
+    padding: 14px 10px;
+    font-size: 11.5px;
+    white-space: normal;
   }
 
   .monitoring-table th:first-child {
     padding-left: 12px;
-    text-align: left;
   }
 
   .monitoring-table th:last-child {
     padding-right: 12px;
-    text-align: right;
   }
 
-  /* Empty state always centered */
   .empty-state {
-    padding: 50px 16px;
+    padding: 50px 10px;
     font-size: 13px;
     text-align: center;
   }
