@@ -1,0 +1,1 @@
+const fs = require('fs'); const css = fs.readFileSync('src/components/Company_section.vue.css', 'utf-8'); const vue = fs.readFileSync('src/components/Company_section.vue', 'utf-8'); const newVue = vue.replace(/<style scoped>[\s\S]*?<\/style>/, css); fs.writeFileSync('src/components/Company_section.vue', newVue, 'utf-8');

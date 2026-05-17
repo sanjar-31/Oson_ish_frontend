@@ -5,8 +5,9 @@
     <!-- Tabs Navigation -->
     <div class="tabs-nav">
       <div class="tabs-list">
+        <!-- FIXED: [PROBLEM 1] Tabs container -->
         <button 
-          class="tab-item" 
+          class="tab-item left-tab" 
           :class="{ 'active': activeTab === 'faol' }"
           @click="switchTab('faol')"
         >
@@ -14,7 +15,7 @@
           <div class="tab-indicator" v-if="activeTab === 'faol'"></div>
         </button>
         <button 
-          class="tab-item" 
+          class="tab-item right-tab" 
           :class="{ 'active': activeTab === 'yopilgan' }"
           @click="switchTab('yopilgan')"
         >
@@ -22,6 +23,8 @@
           <div class="tab-indicator" v-if="activeTab === 'yopilgan'"></div>
         </button>
       </div>
+      <!-- FIXED: [PROBLEM 2] Single full-width animated underline indicator -->
+      <div class="tab-indicator-full" :style="indicatorStyle"></div>
       <div class="tabs-divider"></div>
     </div>
 
@@ -64,12 +67,14 @@
 
         <!-- Dynamic Filter Dropdown -->
         <div class="select-box dynamic-select">
-          <div class="custom-select">
-            <span class="placeholder-label">{{ dynamicFilterLabel }}</span>
-            <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </div>
+          <!-- FIXED: [PROBLEM 3] Converted to native select with default option -->
+          <select v-model="selectedFilter" class="filter-select">
+            <option value="">Barchasi</option>
+            <option value="dynamic">{{ dynamicFilterLabel }}</option>
+          </select>
+          <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
       </div>
 
@@ -110,20 +115,31 @@ const activeTab = ref('faol');
 const searchQuery = ref('');
 const selectedRegion = ref('Barchasi');
 const selectedYear = ref('2026');
-const selectedFilter = ref('Barchasi');
+// FIXED: [PROBLEM 3] Default value is empty string
+const selectedFilter = ref('');
 
 // Reset to defaults on mount
 onMounted(() => {
   activeTab.value = 'faol';
   selectedRegion.value = 'Barchasi';
   selectedYear.value = '2026';
-  selectedFilter.value = 'Barchasi';
+  // FIXED: [PROBLEM 3] Reset to empty string on mount
+  selectedFilter.value = '';
 });
 
 // Logic
 const switchTab = (tab) => {
   activeTab.value = tab;
 };
+
+// FIXED: [PROBLEM 2] Dynamic indicator style computed property
+const indicatorStyle = computed(() => {
+  if (activeTab.value === 'faol') {
+    return { background: 'linear-gradient(to right, #14b8a6 50%, #d1d5db 50%)' };
+  } else {
+    return { background: 'linear-gradient(to right, #d1d5db 50%, #14b8a6 50%)' };
+  }
+});
 
 const dynamicFilterLabel = computed(() => {
   if (activeTab.value === 'faol') {
@@ -215,6 +231,7 @@ const getColWidth = (index) => {
   color: #14b8a6;
 }
 
+/* Original desktop internal tab indicator */
 .tab-indicator {
   position: absolute;
   bottom: 0;
@@ -224,6 +241,11 @@ const getColWidth = (index) => {
   background-color: #14b8a6;
   border-radius: 2px 2px 0 0;
   z-index: 2;
+}
+
+/* Hide the mobile full-width animated underline indicator on desktop */
+.tab-indicator-full {
+  display: none;
 }
 
 .tabs-divider {
@@ -297,8 +319,10 @@ const getColWidth = (index) => {
 
 .filter-select {
   width: 100%;
+  /* FIXED: [PROBLEM 4] Explicit height, padding, and line-height for vertical text alignment */
   height: 46px;
-  padding: 0 40px 0 16px;
+  line-height: 44px;
+  padding: 0 36px 0 12px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
@@ -307,20 +331,6 @@ const getColWidth = (index) => {
   outline: none;
   appearance: none;
   cursor: pointer;
-  box-sizing: border-box;
-}
-
-.custom-select {
-  position: relative;
-  width: 100%;
-  height: 46px;
-  padding: 0 40px 0 16px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
   box-sizing: border-box;
 }
 
@@ -882,9 +892,10 @@ const getColWidth = (index) => {
   }
 
   .tabs-list {
-    display: flex;
-    flex-direction: column;   /* Force vertical stack */
-    align-items: flex-start;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center;
     gap: 0;
     width: 100%;
     margin: 0 !important;
@@ -892,28 +903,41 @@ const getColWidth = (index) => {
   }
 
   .tab-item {
-    width: 100%;
+    flex: 1 !important;
     padding: 12px 0 14px 0;
-    font-size: 14px;
+    font-size: 16px !important;
     font-weight: 500;
-    white-space: normal !important; 
-    word-break: break-word;
-    text-align: left !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
     letter-spacing: 0;
     position: relative;
     box-sizing: border-box;
-    justify-content: flex-start;
   }
 
+  .left-tab {
+    text-align: left !important;
+  }
+
+  .right-tab {
+    text-align: right !important;
+  }
+
+  /* Hide the desktop internal indicators on mobile */
   .tab-indicator {
+    display: none !important;
+  }
+
+  /* Show and style the full-width animated indicator on mobile */
+  .tab-indicator-full {
+    display: block !important;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #14b8a6;
     border-radius: 2px 2px 0 0;
     z-index: 2;
+    transition: background 0.3s ease;
   }
 
   .tabs-divider {

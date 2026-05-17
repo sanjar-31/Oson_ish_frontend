@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Navbar from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import { Sparkles, X, ChevronRight } from 'lucide-vue-next';
+// import { Sparkles, X, ChevronRight } from 'lucide-vue-next';
 
 const activeTab = ref('all');
 const showHelper = ref(true);
@@ -25,14 +25,14 @@ const tabs = [
         <div class="container">
             <div class="breadcrumb-wrapper">
                 <nav class="breadcrumb">
-                    <a href="#" class="breadcrumb-link">
+                    <router-link to="/" class="breadcrumb-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                             <polyline points="9 22 9 12 15 12 15 22" />
                         </svg>
                         Bosh sahifa
-                    </a>
+                    </router-link>
                     <span class="breadcrumb-sep">/</span>
                     <span class="breadcrumb-current">Takliflar</span>
                 </nav>
@@ -90,6 +90,7 @@ const tabs = [
             </div>
         </Transition>
     </main>
+
 
     <Footer />
 </template>
