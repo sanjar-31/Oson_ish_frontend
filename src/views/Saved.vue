@@ -1,21 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { Sparkles, X } from 'lucide-vue-next';
 import Navbar from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-import { Sparkles, X } from 'lucide-vue-next';
+import { ref } from 'vue';
 
-const activeTab = ref('all');
 const showHelper = ref(true);
-
-const tabs = [
-    { id: 'all', label: 'Barchasi', count: 0 },
-    { id: 'incoming', label: 'Kelib tushgan takliflar', count: 0 },
-    { id: 'sent', label: 'Yuborilgan takliflar', count: 0 },
-    { id: 'accepted', label: 'Taklif qabul qilingan', count: 0 },
-    { id: 'interview', label: 'Suxbat', count: 0 },
-    { id: 'hired', label: 'Ishga qabul qilingan', count: 0 },
-    { id: 'rejected', label: 'Rad etilgan', count: 0 },
-];
 </script>
 
 <template>
@@ -34,31 +23,19 @@ const tabs = [
                     Bosh sahifa
                 </router-link>
                 <span class="breadcrumb-sep">/</span>
-                <span class="breadcrumb-current">Takliflar</span>
+                <span class="breadcrumb-current">Vakansiyalar</span>
             </nav>
 
             <!-- Title -->
-            <h1 class="page-title">Takliflar</h1>
-
-            <!-- Tabs -->
-            <div class="tabs-wrapper">
-                <div class="tabs-inner">
-                    <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id"
-                        :class="['tab-btn', activeTab === tab.id ? 'tab-btn--active' : '']">
-                        {{ tab.label }}
-                        <span class="tab-count">{{ tab.count }}</span>
-                        <span v-if="activeTab === tab.id" class="tab-indicator" />
-                    </button>
-                </div>
-            </div>
+            <h1 class="page-title">Saqlanganlar</h1>
 
             <!-- Empty State -->
             <div class="empty-state">
-                <h2 class="empty-title">Hozircha bu bo'limda hech narsa yo'q</h2>
+                <h2 class="empty-title">Saqlanganlarda hali hech narsa yo'q</h2>
                 <p class="empty-desc">
-                    Vakansiyalarga taklif yuborish orqali ish topishingiz mumkin.
+                    Vakansiya yonidagi <span class="heart">❤</span> belgisini bosib, uni saqlashingiz mumkin.
                 </p>
-                <router-link to="/" class="cta-btn">Vakansiyalarni ko'rish</router-link>
+                <router-link to="/vacancies" class="cta-btn">Vakansiyalar</router-link>
             </div>
 
         </div>
@@ -74,7 +51,7 @@ const tabs = [
                     <div class="helper-arrow" />
                 </div>
                 <button class="helper-fab">
-                    <Sparkles :size="28" color="#ffffff" />
+                    <Sparkles :size="26" color="#ffffff" />
                 </button>
             </div>
         </Transition>
@@ -88,19 +65,19 @@ const tabs = [
 
 /* ── Base ── */
 .page {
-    min-height: calc(100vh - 80px);
-    background: #f8fafb;
+    min-height: 100vh;
+    background: #ffffff;
     font-family: 'Inter', sans-serif;
     padding-bottom: 80px;
     box-sizing: border-box;
 }
 
-/* ── Container ── */
+/* ── Container — одинаковый отступ на всех размерах ── */
 .container {
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
     box-sizing: border-box;
 }
 
@@ -109,11 +86,11 @@ const tabs = [
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 20px 0 12px;
+    padding: 24px 0 14px;
     font-size: 13px;
     font-weight: 500;
-    list-style: none;
     margin: 0;
+    list-style: none;
 }
 
 .breadcrumb-link {
@@ -135,6 +112,7 @@ const tabs = [
 
 .breadcrumb-current {
     color: #374151;
+    font-weight: 600;
 }
 
 /* ── Title ── */
@@ -142,76 +120,8 @@ const tabs = [
     font-size: 28px;
     font-weight: 700;
     color: #111827;
-    margin: 4px 0 24px;
+    margin: 0 0 0;
     letter-spacing: -0.4px;
-}
-
-/* ── Tabs ── */
-.tabs-wrapper {
-    border-bottom: 1.5px solid #e5e7eb;
-    margin-bottom: 60px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.tabs-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
-.tabs-inner {
-    display: flex;
-    align-items: center;
-    min-width: max-content;
-}
-
-.tab-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0 20px 14px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    color: #6b7280;
-    background: none;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: color 0.2s;
-}
-
-.tab-btn:first-child {
-    padding-left: 0;
-}
-
-.tab-btn:hover {
-    color: #374151;
-}
-
-.tab-btn--active {
-    color: #00b4cc;
-    font-weight: 600;
-}
-
-.tab-count {
-    font-size: 14px;
-    font-weight: inherit;
-}
-
-.tab-indicator {
-    position: absolute;
-    bottom: -1.5px;
-    left: 0;
-    right: 0;
-    height: 2.5px;
-    background: #00b4cc;
-    border-radius: 2px 2px 0 0;
-}
-
-.tab-btn:first-child .tab-indicator {
-    left: 0;
 }
 
 /* ── Empty State ── */
@@ -220,23 +130,28 @@ const tabs = [
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 40px 16px 60px;
+    padding: 120px 16px 60px;
 }
 
 .empty-title {
     font-size: 20px;
     font-weight: 700;
     color: #111827;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
 }
 
 .empty-desc {
-    font-size: 14px;
-    color: #9ca3af;
+    font-size: 15px;
+    color: #6b7280;
     font-weight: 400;
-    max-width: 300px;
-    margin: 0 0 28px;
+    max-width: 420px;
+    margin: 0 0 32px;
     line-height: 1.7;
+}
+
+.heart {
+    color: #e53e3e;
+    font-style: normal;
 }
 
 .cta-btn {
@@ -244,8 +159,8 @@ const tabs = [
     align-items: center;
     justify-content: center;
     height: 48px;
-    padding: 0 32px;
-    border-radius: 10px;
+    padding: 0 48px;
+    border-radius: 8px;
     background: #00b4cc;
     color: #ffffff;
     font-family: 'Inter', sans-serif;
@@ -253,7 +168,6 @@ const tabs = [
     font-size: 15px;
     text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0, 180, 204, 0.30);
     transition: background 0.2s, transform 0.1s;
     border: none;
 }
@@ -364,63 +278,37 @@ const tabs = [
     transform: translateY(12px) scale(0.95);
 }
 
-/* ════════════════════════════════════════
+/* ════════════════════════════════════
    RESPONSIVE
-   ════════════════════════════════════════ */
+   ════════════════════════════════════ */
 
-/* Tablet */
+/* Tablet ≤ 1024px */
 @media (max-width: 1024px) {
     .container {
-        padding: 0 24px;
+        padding: 0 32px;
     }
 
     .page-title {
         font-size: 26px;
     }
 
-    .tab-btn {
-        padding: 0 16px 14px;
-        font-size: 13px;
+    .empty-state {
+        padding: 100px 16px 60px;
     }
 }
 
-/* Mobile */
-@media (max-width: 640px) {
+/* Mobile ≤ 768px */
+@media (max-width: 768px) {
     .container {
-        padding: 0 16px;
-    }
-
-    .breadcrumb {
-        padding: 14px 0 10px;
+        padding: 0 24px;
     }
 
     .page-title {
-        font-size: 22px;
-        margin-bottom: 18px;
-    }
-
-    .tabs-wrapper {
-        margin-bottom: 36px;
-        margin-left: -16px;
-        margin-right: -16px;
-        padding-left: 16px;
-    }
-
-    .tabs-inner {
-        padding-right: 16px;
-    }
-
-    .tab-btn {
-        font-size: 13px;
-        padding: 0 14px 12px;
-    }
-
-    .tab-btn:first-child {
-        padding-left: 0;
+        font-size: 24px;
     }
 
     .empty-state {
-        padding: 24px 8px 48px;
+        padding: 80px 16px 48px;
     }
 
     .empty-title {
@@ -428,14 +316,46 @@ const tabs = [
     }
 
     .empty-desc {
+        font-size: 14px;
+        max-width: 320px;
+    }
+}
+
+/* Small mobile ≤ 480px */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .breadcrumb {
+        padding: 16px 0 12px;
+        font-size: 12px;
+    }
+
+    .page-title {
+        font-size: 22px;
+    }
+
+    .empty-state {
+        padding: 60px 0 40px;
+    }
+
+    .empty-title {
+        font-size: 17px;
+    }
+
+    .empty-desc {
         font-size: 13px;
+        max-width: 280px;
     }
 
     .cta-btn {
         width: 100%;
-        max-width: 320px;
-        font-size: 14px;
-        height: 46px;
+        max-width: 100%;
+        font-size: 15px;
+        height: 50px;
+        border-radius: 10px;
+        padding: 0 24px;
     }
 
     .helper {
@@ -444,7 +364,7 @@ const tabs = [
     }
 
     .helper-bubble {
-        max-width: 200px;
+        max-width: 190px;
         padding: 12px;
     }
 
@@ -454,19 +374,18 @@ const tabs = [
     }
 }
 
-/* Small phones */
-@media (max-width: 380px) {
+/* Very small ≤ 360px */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 16px;
+    }
+
     .page-title {
         font-size: 20px;
     }
 
-    .tab-btn {
-        font-size: 12px;
-        padding: 0 10px 12px;
-    }
-
     .empty-title {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .empty-desc {
