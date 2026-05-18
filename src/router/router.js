@@ -83,7 +83,7 @@ const routes = [
     {
         path: '/saved',
         name: 'Saved',
-        component: ComingSoon
+        component: () => import('@/views/Saved.vue')
     },
     {
         path: '/register',
