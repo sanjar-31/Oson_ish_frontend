@@ -80,6 +80,7 @@ const tabs = [
         </Transition>
     </main>
 
+
     <Footer />
 </template>
 

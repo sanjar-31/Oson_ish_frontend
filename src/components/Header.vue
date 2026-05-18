@@ -5,13 +5,7 @@
         <!-- Left: Brand + Desktop Nav -->
         <div class="site-header__left">
           <router-link to="/" class="brand-link">
-            <img
-              class="brand-logo"
-              :src="BRAND_LOGO_SRC"
-              :alt="text.logoAlt"
-              width="32"
-              height="32"
-            />
+            <img class="brand-logo" :src="BRAND_LOGO_SRC" :alt="text.logoAlt" width="32" height="32" />
             <div class="brand-text">
               <span class="brand-title">{{ text.brand }}</span>
               <span class="brand-slogan">{{ text.slogan }}</span>
@@ -35,53 +29,33 @@
         <div class="site-header__tail">
           <div class="site-header__actions-scroll">
             <div class="site-header__actions">
-              <a href="https://t.me/quliyev_sanjar" target="_blank" rel="noopener noreferrer" class="help-btn" :aria-label="text.helpAria" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">?</a>
+              <a href="https://t.me/quliyev_sanjar" target="_blank" rel="noopener noreferrer" class="help-btn"
+                :aria-label="text.helpAria"
+                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">?</a>
 
               <div ref="dropdownRef" class="lang-dropdown">
-                <button
-                  type="button"
-                  class="lang-trigger"
-                  @click="langOpen = !langOpen"
-                >
+                <button type="button" class="lang-trigger" @click="langOpen = !langOpen">
                   <span class="lang-trigger__label">{{ activeLangLabel }}</span>
-                  <svg
-                    class="lang-trigger__chev"
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    aria-hidden="true"
-                  >
+                  <svg class="lang-trigger__chev" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
                     <path fill="currentColor" d="M7 10l5 5 5-5H7z" />
                   </svg>
                 </button>
 
                 <div v-if="langOpen" class="lang-panel" role="listbox">
-                  <button
-                    v-for="option in langOptions"
-                    :key="option.code"
-                    type="button"
-                    :class="['lang-option', lang === option.code ? 'lang-option--active' : '']"
-                    role="option"
-                    :aria-selected="lang === option.code"
-                    @click="handleSelectLang(option.code)"
-                  >
+                  <button v-for="option in langOptions" :key="option.code" type="button"
+                    :class="['lang-option', lang === option.code ? 'lang-option--active' : '']" role="option"
+                    :aria-selected="lang === option.code" @click="handleSelectLang(option.code)">
                     <span class="lang-option__text">{{ option.label }}</span>
                     <span v-if="lang === option.code" class="lang-option__check" aria-hidden="true">✓</span>
                   </button>
                 </div>
               </div>
 
-              <router-link to="/monitoring" class="heart-link">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              <router-link to="/offers" class="heart-link" @click.prevent="isMessagesOpen = true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
               </router-link>
 
@@ -91,13 +65,8 @@
             </div>
           </div>
 
-          <button
-            type="button"
-            class="nav-toggle"
-            :aria-expanded="mobileNavOpen"
-            :aria-label="menuAriaLabel"
-            @click="mobileNavOpen = !mobileNavOpen"
-          >
+          <button type="button" class="nav-toggle" :aria-expanded="mobileNavOpen" :aria-label="menuAriaLabel"
+            @click="mobileNavOpen = !mobileNavOpen">
             <span class="nav-toggle__bar" />
             <span class="nav-toggle__bar" />
             <span class="nav-toggle__bar" />
@@ -106,24 +75,11 @@
       </div>
 
       <Teleport to="body">
-        <div
-          v-if="mobileNavOpen && isMobileLayout"
-          class="site-header__drawer-backdrop"
-          @click="mobileNavOpen = false"
-        >
-          <aside
-            class="site-header__drawer"
-            role="navigation"
-            :aria-label="text.mainNav"
-            @click.stop
-          >
+        <div v-if="mobileNavOpen && isMobileLayout" class="site-header__drawer-backdrop" @click="mobileNavOpen = false">
+          <aside class="site-header__drawer" role="navigation" :aria-label="text.mainNav" @click.stop>
             <div class="site-header__drawer-header">
-              <button
-                type="button"
-                class="drawer-close"
-                :aria-label="text.ariaCloseMenu"
-                @click="mobileNavOpen = false"
-              >
+              <button type="button" class="drawer-close" :aria-label="text.ariaCloseMenu"
+                @click="mobileNavOpen = false">
                 ✕
               </button>
             </div>
@@ -141,34 +97,29 @@
             </nav>
 
             <div class="drawer-lang" role="group" aria-label="language selector">
-              <button
-                v-for="option in langOptions"
-                :key="`drawer-${option.code}`"
-                type="button"
+              <button v-for="option in langOptions" :key="`drawer-${option.code}`" type="button"
                 :class="['drawer-lang__option', lang === option.code ? 'drawer-lang__option--active' : '']"
-                @click="handleSelectLang(option.code)"
-              >
+                @click="handleSelectLang(option.code)">
                 <span>{{ option.label }}</span>
                 <span v-if="lang === option.code" aria-hidden="true">✓</span>
               </button>
             </div>
 
-            <router-link
-              to="/register"
-              class="login-btn drawer-login-btn drawer-login-link"
-            >
+            <router-link to="/register" class="login-btn drawer-login-btn drawer-login-link">
               {{ text.login }}
             </router-link>
           </aside>
         </div>
       </Teleport>
     </div>
+    <Messages v-model="isMessagesOpen" />
   </header>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import Messages from './Messages.vue'
 
 const BRAND_LOGO_SRC =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2304afc3'/%3E%3Cpath fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M9 16l5 5 9-10'/%3E%3C/svg%3E"
@@ -194,7 +145,7 @@ const FALLBACK_TEXT = {
 const props = defineProps({
   t: { type: Object, default: () => ({}) },
   lang: { type: String, default: 'uz' },
-  setLang: { type: Function, default: () => {} },
+  setLang: { type: Function, default: () => { } },
 })
 
 const router = useRouter()
@@ -205,6 +156,7 @@ const text = computed(() => ({ ...FALLBACK_TEXT, ...props.t }))
 const langOpen = ref(false)
 const mobileNavOpen = ref(false)
 const isMobileLayout = ref(false)
+const isMessagesOpen = ref(false)
 const dropdownRef = ref(null)
 
 const langOptions = computed(() => [
@@ -295,6 +247,9 @@ onUnmounted(() => {
   --header-pad-x: 32px;
   --brand-copy-width: 15ch;
 
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
   border-bottom: 1px solid var(--color-border);
   background: #f3f4f6;
@@ -311,8 +266,10 @@ onUnmounted(() => {
   flex-wrap: nowrap;
   align-items: center;
   gap: clamp(1.35rem, 3vw, 2.6rem);
-  min-height: calc(clamp(3.65rem, 5.5vw, 4.25rem) + 20px);
-  padding-inline: 24px;
+  min-height: clamp(3.65rem, 5.5vw, 4.25rem);
+  max-width: 1415px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 48px);
   padding-block: clamp(0.35rem, 1vw, 0.6rem);
 }
 
@@ -320,7 +277,7 @@ onUnmounted(() => {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: clamp(0.5rem, 1vw, 1.2rem); /* Fix 4: Reduced spacing to move links closer to logo */
+  gap: clamp(0.5rem, 1vw, 1.2rem);
   min-width: 0;
   flex: 0 1 auto;
 }
@@ -364,7 +321,7 @@ onUnmounted(() => {
   width: var(--brand-copy-width);
   max-width: var(--brand-copy-width);
   font-size: clamp(1.7rem, 1.05vw + 0.9rem, 1.6rem);
-  font-weight: 900; /* Fix 2: Made brand text bolder */
+  font-weight: 900;
   letter-spacing: -0.028em;
   color: var(--color-text);
   line-height: 1.12;
@@ -378,8 +335,8 @@ onUnmounted(() => {
   max-width: var(--brand-copy-width);
   min-width: var(--brand-copy-width);
   margin-top: 0.14em;
-  font-size: 9px; /* Fix 3: Increased slogan font size */
-  font-weight: 500; /* Fix 3: Made slogan slightly bolder */
+  font-size: 9px;
+  font-weight: 500;
   letter-spacing: 0.012em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -403,7 +360,7 @@ onUnmounted(() => {
   position: relative;
   display: inline-block;
   padding-bottom: 0.2em;
-  font-size: clamp(0.9375rem, 0.32vw + 0.825rem, 1rem); /* Fix 4: Increased font size by ~2px */
+  font-size: clamp(0.9375rem, 0.32vw + 0.825rem, 1rem);
   font-weight: 500;
   letter-spacing: -0.011em;
   color: var(--color-text-secondary);
@@ -433,14 +390,6 @@ onUnmounted(() => {
 
 .nav-link:hover {
   color: #0f766e;
-}
-
-.nav-link--resumes {
-  /* Fix 5: Removed specific styling so it inherits standard nav-link style and matches 'Tashkilotlar' */
-}
-
-.nav-link--resumes:hover {
-  color: #000 !important;
 }
 
 .nav-link--drawer {
@@ -482,7 +431,10 @@ onUnmounted(() => {
     scrollbar-width: none;
     mask-image: linear-gradient(to right, #000 92%, transparent 100%);
   }
-  .site-header__actions-scroll::-webkit-scrollbar { display: none; }
+
+  .site-header__actions-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .site-header__actions {
@@ -512,7 +464,9 @@ onUnmounted(() => {
   background: #f8fafc;
 }
 
-.lang-dropdown { position: relative; }
+.lang-dropdown {
+  position: relative;
+}
 
 .lang-trigger {
   display: inline-flex;
@@ -528,7 +482,9 @@ onUnmounted(() => {
   transition: color 0.2s ease;
 }
 
-.lang-trigger:hover { color: var(--color-teal-dark); }
+.lang-trigger:hover {
+  color: var(--color-teal-dark);
+}
 
 .lang-panel {
   position: absolute;
@@ -557,10 +513,18 @@ onUnmounted(() => {
   transition: background 0.15s ease;
 }
 
-.lang-option:hover { background: #f8fafc; }
+.lang-option:hover {
+  background: #f8fafc;
+}
 
-.lang-option--active .lang-option__text { color: #178cf9; }
-.lang-option__check { color: #178cf9; font-size: 14px; }
+.lang-option--active .lang-option__text {
+  color: #178cf9;
+}
+
+.lang-option__check {
+  color: #178cf9;
+  font-size: 14px;
+}
 
 .heart-link {
   display: inline-flex;
@@ -571,7 +535,9 @@ onUnmounted(() => {
   transition: color 0.2s ease;
 }
 
-.heart-link:hover { color: var(--color-teal-dark); }
+.heart-link:hover {
+  color: var(--color-teal-dark);
+}
 
 .login-btn {
   display: flex;
@@ -592,7 +558,9 @@ onUnmounted(() => {
   white-space: nowrap;
 }
 
-.login-btn:hover { transform: translateY(-2px); }
+.login-btn:hover {
+  transform: translateY(-2px);
+}
 
 .nav-toggle {
   display: none;
@@ -608,8 +576,13 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1023px) {
-  .nav-toggle { display: inline-flex; }
-  .site-header__actions-scroll { display: none; }
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-header__actions-scroll {
+    display: none;
+  }
 }
 
 .nav-toggle__bar {
@@ -680,7 +653,9 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
-.drawer-lang__option--active { color: #178cf9; }
+.drawer-lang__option--active {
+  color: #178cf9;
+}
 
 .drawer-login-btn {
   width: 100%;
