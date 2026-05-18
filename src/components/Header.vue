@@ -247,6 +247,9 @@ onUnmounted(() => {
   --header-pad-x: 32px;
   --brand-copy-width: 15ch;
 
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
   border-bottom: 1px solid var(--color-border);
   background: #f3f4f6;
@@ -263,8 +266,10 @@ onUnmounted(() => {
   flex-wrap: nowrap;
   align-items: center;
   gap: clamp(1.35rem, 3vw, 2.6rem);
-  min-height: calc(clamp(3.65rem, 5.5vw, 4.25rem) + 20px);
-  padding-inline: 24px;
+  min-height: clamp(3.65rem, 5.5vw, 4.25rem);
+  max-width: 1415px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 48px);
   padding-block: clamp(0.35rem, 1vw, 0.6rem);
 }
 
@@ -273,7 +278,6 @@ onUnmounted(() => {
   flex-wrap: nowrap;
   align-items: center;
   gap: clamp(0.5rem, 1vw, 1.2rem);
-  /* Fix 4: Reduced spacing to move links closer to logo */
   min-width: 0;
   flex: 0 1 auto;
 }
@@ -318,7 +322,6 @@ onUnmounted(() => {
   max-width: var(--brand-copy-width);
   font-size: clamp(1.7rem, 1.05vw + 0.9rem, 1.6rem);
   font-weight: 900;
-  /* Fix 2: Made brand text bolder */
   letter-spacing: -0.028em;
   color: var(--color-text);
   line-height: 1.12;
@@ -333,9 +336,7 @@ onUnmounted(() => {
   min-width: var(--brand-copy-width);
   margin-top: 0.14em;
   font-size: 9px;
-  /* Fix 3: Increased slogan font size */
   font-weight: 500;
-  /* Fix 3: Made slogan slightly bolder */
   letter-spacing: 0.012em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -360,7 +361,6 @@ onUnmounted(() => {
   display: inline-block;
   padding-bottom: 0.2em;
   font-size: clamp(0.9375rem, 0.32vw + 0.825rem, 1rem);
-  /* Fix 4: Increased font size by ~2px */
   font-weight: 500;
   letter-spacing: -0.011em;
   color: var(--color-text-secondary);
@@ -390,14 +390,6 @@ onUnmounted(() => {
 
 .nav-link:hover {
   color: #0f766e;
-}
-
-.nav-link--resumes {
-  /* Fix 5: Removed specific styling so it inherits standard nav-link style and matches 'Tashkilotlar' */
-}
-
-.nav-link--resumes:hover {
-  color: #000 !important;
 }
 
 .nav-link--drawer {
