@@ -105,9 +105,14 @@
               </button>
             </div>
 
-            <router-link to="/register" class="login-btn drawer-login-btn drawer-login-link">
-              {{ text.login }}
-            </router-link>
+            <div class="drawer-actions">
+              <a href="https://t.me/quliyev_sanjar" target="_blank" rel="noopener noreferrer" class="drawer-help-btn">
+                Yordam
+              </a>
+              <router-link to="/login" class="login-btn drawer-login-btn">
+                {{ text.login }}
+              </router-link>
+            </div>
           </aside>
         </div>
       </Teleport>
@@ -398,7 +403,7 @@ onUnmounted(() => {
   width: 100%;
   min-height: 44px;
   padding: 0.65rem 0;
-  font-size: clamp(1rem, 0.4vw + 0.88rem, 1.12rem);
+  font-size: clamp(1.05rem, 0.3vw + 0.95rem, 1.18rem);
 }
 
 .site-header__tail {
@@ -595,6 +600,14 @@ onUnmounted(() => {
 }
 
 .site-header__drawer {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-border: #e5e7eb;
+  --color-teal: #00a3bf;
+  --color-teal-dark: #0891b2;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #2d3742;
+  --color-text-muted: #6b7280;
+
   width: min(88vw, 360px);
   height: 100dvh;
   margin-left: auto;
@@ -603,6 +616,8 @@ onUnmounted(() => {
   padding: clamp(0.5rem, 2vw, 0.85rem) clamp(12px, 3.8vw, 20px);
   display: flex;
   flex-direction: column;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 .site-header__drawer-backdrop {
@@ -632,6 +647,7 @@ onUnmounted(() => {
 .site-header__drawer-nav {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .drawer-lang {
@@ -649,7 +665,7 @@ onUnmounted(() => {
   border: none;
   background: transparent;
   color: var(--color-text-secondary);
-  font-size: clamp(0.95rem, 0.35vw + 0.82rem, 1.05rem);
+  font-size: clamp(0.98rem, 0.3vw + 0.88rem, 1.08rem);
   cursor: pointer;
 }
 
@@ -659,7 +675,54 @@ onUnmounted(() => {
 
 .drawer-login-btn {
   width: 100%;
-  margin-top: auto;
-  min-height: 44px;
+  min-height: 42px;
+  font-size: clamp(1rem, 0.3vw + 0.92rem, 1.12rem);
+}
+
+.drawer-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer-login-btn,
+.drawer-help-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+  font-size: clamp(1rem, 0.3vw + 0.92rem, 1.12rem) !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.drawer-help-btn {
+  border: 1px solid var(--color-teal) !important;
+  background: #fff !important;
+  color: var(--color-teal) !important;
+}
+
+.drawer-help-btn:hover {
+  background: rgba(0, 163, 191, 0.08) !important;
+}
+
+.drawer-login-btn {
+  border: 1px solid var(--color-teal) !important;
+  background: var(--color-teal) !important;
+  color: #fff !important;
+}
+
+.drawer-login-btn:hover {
+  background: var(--color-teal-dark) !important;
 }
 </style>

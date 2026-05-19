@@ -89,11 +89,6 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: ComingSoon
-    },
-    {
-        path: '/offers',
-        name: 'Offers',
-        component: () => import('@/views/Offers.vue')
     }
 ]
 
