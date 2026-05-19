@@ -176,68 +176,69 @@ const navigateTo = (path) => {
         </div>
       </div>
 
+      <div class="warning-container">
+        <div class="warning-section">
+          <p class="warning-text">Iltimos, saytga to'g'ri ma'lumot kiriting. Boshqalar vaqtini hurmat qiling.</p>
+        </div>
+        <hr class="thin-divider" />
+      </div>
+
       <!-- Bottom Layout -->
       <div class="hero-bottom">
-          <!-- Stats on bottom left -->
-          <div class="stats-group">
-            <div class="stat-card" @click="navigateTo('/vacancies')">
-              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              </svg>
-              <div class="stat-content">
-                <span class="stat-number">46634</span>
-                <span class="stat-label">Vakansiyalar</span>
-              </div>
-            </div>
-            <div class="stat-card" @click="navigateTo('/resumes')">
-              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <div class="stat-content">
-                <span class="stat-number">163695</span>
-                <span class="stat-label">Rezyumelar</span>
-              </div>
-            </div>
-            <div class="stat-card" @click="navigateTo('/companies')">
-              <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7M4 21V7m16 14V7" />
-              </svg>
-              <div class="stat-content">
-                <span class="stat-number">28919</span>
-                <span class="stat-label">Tashkilotlar</span>
-              </div>
+        <!-- Stats on bottom left -->
+        <div class="stats-group">
+          <div class="stat-card" @click="navigateTo('/vacancies')">
+            <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            <div class="stat-content">
+              <span class="stat-number">46634</span>
+              <span class="stat-label">Vakansiyalar</span>
             </div>
           </div>
+          <div class="stat-card" @click="navigateTo('/resumes')">
+            <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <div class="stat-content">
+              <span class="stat-number">163695</span>
+              <span class="stat-label">Rezyumelar</span>
+            </div>
+          </div>
+          <div class="stat-card" @click="navigateTo('/companies')">
+            <svg class="stat-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7M4 21V7m16 14V7" />
+            </svg>
+            <div class="stat-content">
+              <span class="stat-number">28919</span>
+              <span class="stat-label">Tashkilotlar</span>
+            </div>
+          </div>
+        </div>
 
-          <!-- Right side elements -->
-          <div class="right-actions">
-            <div class="warning-section">
-              <p class="warning-text">Iltimos, saytga to'g'ri ma'lumot kiriting. Boshqalar vaqtini hurmat qiling.</p>
-            </div>
-            <hr class="thin-divider" />
-            <div class="action-buttons">
-              <router-link to="/resume/create" class="action-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="12" y1="18" x2="12" y2="12" />
-                <line x1="9" y1="15" x2="15" y2="15" />
-              </svg>
-              Rezyume joylash
-            </router-link>
-            <router-link to="/vacancy/create" class="action-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-              </svg>
-              Vakansiya joylash
-            </router-link>
-          </div>
+        <!-- Action buttons on bottom right -->
+        <div class="action-buttons">
+          <router-link to="/resume/create" class="action-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+            Rezyume joylash
+          </router-link>
+          <router-link to="/vacancy/create" class="action-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            Vakansiya joylash
+          </router-link>
         </div>
       </div>
     </div>
@@ -254,16 +255,19 @@ const navigateTo = (path) => {
 </template>
 
 <style scoped>
+/* =============================================
+   BASE / DESKTOP STYLES (1025px va undan katta)
+   ============================================= */
 .hero-section {
   position: relative;
   background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  padding: 60px 40px 130px 40px; /* Reduced horizontal padding */
+  padding: 60px 40px 130px 40px;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
   border-radius: 24px;
-  margin: 0 24px; /* Reduced outer horizontal spacing */
+  margin: 0 24px;
 }
 
 .hero-overlay {
@@ -290,13 +294,17 @@ const navigateTo = (path) => {
   top: -20px;
   background: #C84E5A;
   color: white;
-  padding: 0px 16px;
+  padding: 8px 16px;
   border-radius: 17px;
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.4;
   font-weight: 500;
   box-shadow: 0 4px 15px rgba(200, 78, 90, 0.3);
+}
+
+.top-banner p {
+  margin: 0;
 }
 
 .hero-content {
@@ -308,7 +316,6 @@ const navigateTo = (path) => {
   color: white;
   font-size: 42px;
   font-weight: 800;
-  /* Bold geometric sans-serif */
   line-height: 1.2;
   margin-bottom: 40px;
 }
@@ -394,7 +401,6 @@ const navigateTo = (path) => {
 
 .btn-search {
   background: #00BCD4;
-  /* Updated primary teal */
   color: white;
   border: none;
   height: 48px;
@@ -404,6 +410,10 @@ const navigateTo = (path) => {
   font-size: 16px;
   cursor: pointer;
   transition: transform 0.1s, opacity 0.2s;
+}
+
+.warning-container {
+  width: 100%;
 }
 
 .warning-section {
@@ -421,12 +431,6 @@ const navigateTo = (path) => {
   display: inline-block;
 }
 
-.right-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .thin-divider {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -440,7 +444,6 @@ const navigateTo = (path) => {
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 12px;
-  margin-bottom: 0;
 }
 
 .stats-group {
@@ -456,7 +459,7 @@ const navigateTo = (path) => {
   cursor: pointer;
   padding: 12px 20px;
   border-radius: 16px;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .stat-icon {
@@ -478,7 +481,6 @@ const navigateTo = (path) => {
   opacity: 0.7;
 }
 
-/* Hover Effect for Stats - Frosted glass style */
 .stat-card:hover {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -518,11 +520,9 @@ const navigateTo = (path) => {
   left: 0;
   right: 0;
   background: #1a2332;
-  /* Dark navy background */
   padding: 32px 0;
   z-index: 2;
   border-radius: 0 0 24px 24px;
-  /* Corner rounding as requested */
 }
 
 .carousel-track {
@@ -531,10 +531,8 @@ const navigateTo = (path) => {
   animation: scroll 30s linear infinite;
 }
 
-/* Auto-scroll behavior: continue scrolling even when hovered */
 .brand-carousel:hover .carousel-track {
   animation-play-state: running;
-  /* Explicitly keep running */
 }
 
 .brand-item {
@@ -560,25 +558,661 @@ const navigateTo = (path) => {
   }
 }
 
+/* =============================================
+   1024px — Kichik laptop
+   ============================================= */
 @media (max-width: 1024px) {
-  .search-panel {
-    flex-direction: column;
+  .hero-section {
+    margin: 0 16px;
+    padding: 44px 28px 110px 28px;
   }
 
-  .input-group,
+  .hero-content {
+    margin-top: 72px;
+    max-width: 80%;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    margin-bottom: 28px;
+  }
+
+  .top-banner {
+    font-size: 14px;
+    padding: 8px 14px;
+    top: -14px;
+    max-width: 260px;
+  }
+
+  .input-group:nth-child(1) {
+    flex: 0 0 340px;
+  }
+
+  .input-group:nth-child(2) {
+    flex: 0 0 140px;
+  }
+
+  .input-wrapper {
+    height: 44px;
+  }
+
   .btn-search {
+    height: 44px;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+
+  .warning-text {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+
+  .stats-group {
+    gap: 24px;
+  }
+
+  .stat-card {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .stat-number {
+    font-size: 17px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .action-buttons {
+    gap: 12px;
+  }
+
+  .action-btn {
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+
+  .action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .brand-carousel {
+    padding: 26px 0;
+  }
+
+  .brand-name {
+    font-size: 22px;
+  }
+
+  .brand-item {
+    padding: 0 38px;
+  }
+}
+
+/* =============================================
+   900px — Katta planshet (landscape)
+   ============================================= */
+@media (max-width: 900px) {
+  .hero-section {
+    margin: 0 14px;
+    padding: 40px 24px 105px 24px;
+  }
+
+  .hero-content {
+    margin-top: 64px;
+    max-width: 88%;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .top-banner {
+    font-size: 13px;
+    padding: 7px 12px;
+    top: -12px;
+    max-width: 240px;
+  }
+
+  .search-panel {
+    gap: 8px;
+  }
+
+  .input-group:nth-child(1) {
+    flex: 0 0 280px;
+  }
+
+  .input-group:nth-child(2) {
+    flex: 0 0 130px;
+  }
+
+  .input-wrapper {
+    height: 42px;
+  }
+
+  .btn-search {
+    height: 42px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  .warning-text {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .thin-divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .stats-group {
+    gap: 18px;
+  }
+
+  .stat-card {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .stat-number {
+    font-size: 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .action-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .brand-carousel {
+    padding: 22px 0;
+  }
+
+  .brand-name {
+    font-size: 20px;
+  }
+
+  .brand-item {
+    padding: 0 32px;
+  }
+}
+
+/* =============================================
+   768px — Planshet (portrait)
+   ============================================= */
+@media (max-width: 768px) {
+  .hero-section {
+    margin: 0 10px;
+    padding: 36px 20px 100px 20px;
+    border-radius: 18px;
+  }
+
+  .hero-content {
+    margin-top: 16px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Top banner: o'rtada, bir qatorda, wrap yo'q */
+  .top-banner {
+    position: relative;
+    top: auto;
+    right: auto;
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 13px;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    max-width: none;
+    margin: 0 auto 16px auto;
+  }
+
+  .top-banner br {
+    display: none;
+  }
+
+  /* Search inputs vertikal teriladi */
+  .search-panel {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-group:nth-child(1),
+  .input-group:nth-child(2) {
+    flex: none;
     width: 100%;
   }
 
+  .input-wrapper {
+    height: 46px;
+  }
+
+  .btn-search {
+    width: 100%;
+    height: 46px;
+    font-size: 15px;
+  }
+
+  /* Warning: o'rtada, bir qatorda */
+  .warning-section {
+    text-align: center;
+  }
+
+  .warning-text {
+    font-size: 13px;
+    padding: 7px 16px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  /* Bottom: column layout, o'rtada */
   .hero-bottom {
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .stats-group {
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-card {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .stat-number {
+    font-size: 15px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .action-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 10px;
+    font-size: 12px;
+    gap: 7px;
+  }
+
+  .action-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .brand-carousel {
+    padding: 20px 0;
+    border-radius: 0 0 18px 18px;
+  }
+
+  .brand-name {
+    font-size: 18px;
+  }
+
+  .brand-item {
+    padding: 0 26px;
+  }
+}
+
+/* =============================================
+   600px — Katta telefon
+   ============================================= */
+@media (max-width: 600px) {
+  .hero-section {
+    margin: 0 8px;
+    padding: 30px 16px 90px 16px;
+    border-radius: 14px;
+  }
+
+  .hero-content {
+    margin-top: 48px;
+  }
+
+  .hero-title {
+    font-size: 21px;
+    margin-bottom: 18px;
+  }
+
+  .top-banner {
+    font-size: 11px;
+    padding: 6px 12px;
+    max-width: 280px;
+    white-space: normal;
+    top: -8px;
+  }
+
+  .input-wrapper {
+    height: 44px;
+  }
+
+  .btn-search {
+    height: 44px;
+    font-size: 14px;
+  }
+
+  .warning-text {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 
   .stats-group {
     flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 7px 10px;
+    gap: 7px;
+  }
+
+  .stat-number {
+    font-size: 14px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 13px;
     justify-content: center;
+  }
+
+  .brand-carousel {
+    padding: 18px 0;
+    border-radius: 0 0 14px 14px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brand-item {
+    padding: 0 22px;
+  }
+}
+
+/* =============================================
+   480px — O'rta telefon
+   ============================================= */
+@media (max-width: 480px) {
+  .hero-section {
+    margin: 0 6px;
+    padding: 26px 14px 84px 14px;
+    border-radius: 12px;
+  }
+
+  .hero-content {
+    margin-top: 42px;
+  }
+
+  .hero-title {
+    font-size: 19px;
+    margin-bottom: 16px;
+  }
+
+  .top-banner {
+    font-size: 11px;
+    padding: 6px 12px;
+    max-width: 320px;
+    border-radius: 11px;
+    white-space: normal;
+  }
+
+  .top-banner br {
+    display: block;
+  }
+
+  .input-wrapper {
+    height: 42px;
+  }
+
+  .btn-search {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .warning-text {
+    font-size: 9px;
+    padding: 5px 7px;
+    border-radius: 9px;
+  }
+
+  .thin-divider {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .hero-bottom {
+    gap: 12px;
+  }
+
+  .stats-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 0;
+    padding: 6px 4px;
+    gap: 4px;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  .stat-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .stat-number {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .stat-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .action-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .action-btn {
+    width: 95%;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 11px;
+    justify-content: center;
+  }
+
+  .brand-carousel {
+    padding: 16px 0;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .brand-item {
+    padding: 0 18px;
+  }
+}
+
+/* =============================================
+   360px — Kichkina telefon
+   ============================================= */
+@media (max-width: 360px) {
+  .hero-section {
+    margin: 0 4px;
+    padding: 22px 12px 78px 12px;
+    border-radius: 10px;
+  }
+
+  .hero-content {
+    margin-top: 36px;
+  }
+
+  .hero-title {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .top-banner {
+    font-size: 10px;
+    padding: 5px 10px;
+    max-width: 280px;
+    border-radius: 10px;
+    white-space: normal;
+  }
+
+  .top-banner br {
+    display: block;
+  }
+
+  .input-wrapper {
+    height: 40px;
+  }
+
+  .btn-search {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .warning-text {
+    font-size: 9.5px;
+    padding: 4px 8px;
+  }
+
+  .stats-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 0;
+    padding: 5px 3px;
+    gap: 3px;
+    border-radius: 8px;
+    justify-content: center;
+  }
+
+  .stat-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .stat-number {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .stat-label {
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .stat-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+
+  .action-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 11px;
+    gap: 6px;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  .action-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .brand-carousel {
+    padding: 14px 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .brand-name {
+    font-size: 13px;
+  }
+
+  .brand-item {
+    padding: 0 14px;
   }
 }
 </style>
