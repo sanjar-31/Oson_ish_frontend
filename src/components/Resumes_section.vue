@@ -1,15 +1,19 @@
 <template>
   <div class="resumes-section">
     <div class="container">
+      <h1 class="page-title">Rezyumelar</h1>
+
       <div class="layout">
         <!-- Left Column -->
         <div class="main-column">
-          <h1 class="page-title">Rezyumelar</h1>
-          
+
           <div class="search-box">
             <div class="search-input-wrapper">
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                  stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               <input type="text" v-model="searchQuery" placeholder="Kasb, lavozim nomi" />
             </div>
@@ -38,8 +42,10 @@
                   <option value="">Barcha hududlar</option>
                   <option v-for="region in regions" :key="region" :value="region">{{ region }}</option>
                 </select>
-                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </div>
             </div>
@@ -50,8 +56,10 @@
                 <select v-model="tuman">
                   <option value="">Barcha tumanlar</option>
                 </select>
-                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </div>
             </div>
@@ -107,7 +115,8 @@
                 <label>Til bilish</label>
                 <button class="add-lang-btn" @click="tilQoshish">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
                   </svg>
                   Til qo'shish
                 </button>
@@ -120,13 +129,16 @@
                       <option value="">Tilni tanlang</option>
                       <option v-for="l in languages" :key="l" :value="l">{{ l }}</option>
                     </select>
-                    <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 9L12 15L18 9" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
                     </svg>
                   </div>
                   <button class="remove-lang-btn" @click="tilOchirish(til.id)">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M18 6L6 18M6 6L18 18" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M18 6L6 18M6 6L18 18" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
                     </svg>
                   </button>
                 </div>
@@ -311,7 +323,7 @@ const tozalash = () => {
   yoshDan.value = null;
   yoshGacha.value = null;
   tillar.value = [];
-  
+
   Object.keys(malumot).forEach(k => malumot[k] = false);
   Object.keys(bandlik).forEach(k => bandlik[k] = false);
   Object.keys(ishUsuli).forEach(k => ishUsuli[k] = false);
@@ -342,8 +354,8 @@ const tilOchirish = (id) => {
 }
 
 .container {
-  width: 100%;
-  padding: 0 32px;
+  max-width: 1409px;
+  margin: 0 auto;
 }
 
 .layout {
@@ -446,7 +458,7 @@ const tilOchirish = (id) => {
   margin-bottom: 24px;
 }
 
-.filter-group > label {
+.filter-group>label {
   display: block;
   font-size: 15px;
   font-weight: 500;
@@ -533,7 +545,7 @@ const tilOchirish = (id) => {
   transition: border-color 0.2s;
 }
 
-.radio-item input:checked ~ .radio-mark {
+.radio-item input:checked~.radio-mark {
   border-color: #0096B1;
 }
 
@@ -546,7 +558,7 @@ const tilOchirish = (id) => {
   display: none;
 }
 
-.radio-item input:checked ~ .radio-mark::after {
+.radio-item input:checked~.radio-mark::after {
   display: block;
 }
 
@@ -588,7 +600,7 @@ const tilOchirish = (id) => {
   transition: border-color 0.2s, background-color 0.2s;
 }
 
-.checkbox-item input:checked ~ .checkbox-mark {
+.checkbox-item input:checked~.checkbox-mark {
   border-color: #0096B1;
   background-color: #0096B1;
 }
@@ -604,7 +616,7 @@ const tilOchirish = (id) => {
   margin-top: -2px;
 }
 
-.checkbox-item input:checked ~ .checkbox-mark::after {
+.checkbox-item input:checked~.checkbox-mark::after {
   display: block;
 }
 
