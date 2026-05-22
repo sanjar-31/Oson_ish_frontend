@@ -419,8 +419,6 @@ const tilOchirish = (id) => {
 
 /* Filters Sidebar */
 .filters-sidebar {
-  position: sticky;
-  top: 24px;
   align-self: flex-start;
   height: fit-content;
 }

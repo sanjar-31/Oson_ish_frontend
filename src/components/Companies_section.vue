@@ -299,8 +299,6 @@ const clearStirError = () => {
 
 /* Sidebar Styling */
 .filters-sidebar {
-  position: sticky;
-  top: 24px;
   align-self: flex-start;
   height: fit-content;
   background: #ffffff;
