@@ -1,9 +1,10 @@
 <template>
   <div class="vacancies-container">
+    <h1 class="page-title">Vakansiyalar</h1>
+
     <div class="main-layout">
       <!-- Left Column -->
       <div class="left-column">
-        <h1 class="page-title">Vakansiyalar</h1>
 
         <div class="search-row">
           <div class="input-wrapper">
@@ -365,41 +366,48 @@ const resetFilters = () => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
 
 .vacancies-container {
-  font-family: 'Inter', sans-serif;
+  background: #F9FAFB;
+  min-height: 100vh;
+  padding: 40px 0;
   max-width: 1409px;
   margin: 0 auto;
 }
 
 .main-layout {
-  display: flex;
-  justify-content: space-between; /* Formani o'ngga surish uchun */
-  gap: 24px;
-  align-items: flex-start; /* Fix 8: Added to make position sticky work correctly */
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: flex-start;
 }
 
 /* Left Column */
 .left-column {
-  flex: 1; /* Qolgan barcha bo'sh joyni egallaydi, gap: 24px saqlanib qoladi */
+  min-width: 0;
 }
 
 .page-title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  color: #1A1A2E;
-  margin: 0 0 36px 0; /* Fix 7: Increased margin to move search form down */
+  color: #111827;
+  margin: 0 0 24px 0;
 }
 
 .search-row {
   display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .input-wrapper {
-  flex: 1;
+  flex-grow: 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -408,48 +416,53 @@ const resetFilters = () => {
 .search-icon {
   position: absolute;
   left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .input-wrapper input {
   width: 100%;
-  border: 1px solid #D1D5DB;
-  border-radius: 8px;
-  padding: 14px 20px 14px 48px;
-  font-size: 18px;
+  height: 52px;
+  padding: 0 16px 0 48px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  background: #FFFFFF;
+  font-size: 16px;
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
 }
 
 .input-wrapper input:focus {
-  border-color: #00B5B5;
+  border-color: #0096B1;
 }
 
 .search-btn {
-  background: #00B5B5;
+  background: #0096B1;
   color: white;
   border: none;
-  border-radius: 8px;
+  padding: 0 32px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 600;
-  font-size: 18px;
-  padding: 14px 28px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
+  height: 52px;
   font-family: inherit;
 }
 
 .search-btn:hover {
-  background: #009999;
+  opacity: 0.9;
 }
 
 .mobile-filter-btn {
   display: none;
   width: 100%;
   height: 48px;
-  background: #00B5B5;
+  background: #0096B1;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
@@ -461,17 +474,16 @@ const resetFilters = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
   margin-bottom: 24px;
 }
 
 .results-text {
-  font-size: 13px;
-  color: #6B7280;
+  font-size: 14px;
+  color: #9CA3AF;
 }
 
 .sort-dropdown {
-  color: #00B5B5;
+  color: #0096B1;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -480,7 +492,7 @@ const resetFilters = () => {
   background: transparent;
   padding: 4px 24px 4px 8px;
   outline: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%2300B5B5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%230096B1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right center;
   font-family: inherit;
@@ -488,62 +500,59 @@ const resetFilters = () => {
 
 /* Right Column (Filter Panel) */
 .right-column {
-  width: 22%;
   position: sticky;
-  top: 24px; /* Updated top sticky position to avoid hugging the absolute edge */
+  top: 24px;
   align-self: flex-start;
-  margin-top: 70px; /* Align filter panel with the search button row */
+  height: fit-content;
 }
-
-/* Removed scrollbar styling since overflow is removed */
 
 .filter-panel {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #F2F2F2;
+  border-radius: 16px;
+  padding: 24px;
 }
 
 .filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 24px;
 }
 
 .filter-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1A1A2E;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
 }
 
 .reset-btn {
-  font-size: 14px;
-  color: #00B5B5;
   background: none;
   border: none;
+  color: #FF4B55;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
   font-family: inherit;
 }
 
 .filter-divider {
-  height: 1px;
-  background-color: #C9A96E;
   border: none;
-  margin: 12px 0;
+  border-top: 1px solid #F2F2F2;
+  margin: 24px 0;
 }
 
 /* Filter Fields */
 .filter-group {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .filter-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
   display: block;
-  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6B7280;
+  margin-bottom: 12px;
 }
 
 .select-wrapper {
@@ -554,12 +563,12 @@ const resetFilters = () => {
 .select-wrapper::after {
   content: "";
   position: absolute;
-  right: 12px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  width: 10px;
-  height: 6px;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239CA3AF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
@@ -568,56 +577,61 @@ const resetFilters = () => {
 .select-wrapper select,
 .custom-input {
   width: 100%;
-  height: 42px;
-  border: 1px solid #D1D5DB;
-  border-radius: 8px;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #F3F4F6;
+  border-radius: 10px;
+  background: #F9FAFB;
   font-size: 14px;
-  color: #6B7280;
-  padding: 0 32px 0 12px;
+  color: #111827;
   appearance: none;
   outline: none;
   font-family: inherit;
-  background: #FFFFFF;
   box-sizing: border-box;
 }
 
 .select-wrapper select:focus,
 .custom-input:focus {
-  border-color: #00B5B5;
+  border-color: #0096B1;
 }
 
 .custom-input {
-  padding: 0 12px; 
+  padding: 0 16px; 
 }
 .select-wrapper .custom-input + ::after {
   display: none;
 }
 
 /* Dynamic Language Group */
+.dynamic-group {
+  margin-bottom: 24px;
+}
+
 .dynamic-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 .dynamic-header .filter-label {
   margin-bottom: 0;
 }
 
 .add-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #00B5B5;
   background: none;
   border: none;
-  font-size: 13px;
+  color: #0096B1;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   cursor: pointer;
   font-family: inherit;
 }
 
 .empty-text {
-  font-size: 13px;
+  font-size: 14px;
   color: #9CA3AF;
   margin: 0;
 }
@@ -634,48 +648,48 @@ const resetFilters = () => {
 }
 
 .sm-select {
-  height: 38px !important;
+  height: 48px !important;
 }
 
 .remove-btn {
-  color: #EF4444;
   background: none;
   border: none;
-  font-size: 20px;
   cursor: pointer;
+  padding: 4px;
+  font-size: 20px;
+  color: #9CA3AF;
   line-height: 1;
-  padding: 0 4px;
 }
 
 /* Range Inputs */
 .range-inputs {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .range-inputs input {
-  flex: 1;
-  width: 0;
-  height: 42px;
-  border: 1px solid #D1D5DB;
-  border-radius: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #F3F4F6;
+  border-radius: 10px;
+  background: #F9FAFB;
   font-size: 14px;
-  padding: 0 10px;
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
 }
 
 .range-inputs input:focus {
-  border-color: #00B5B5;
+  border-color: #0096B1;
 }
 
 .range-inputs input.invalid-input {
-  border-color: #EF4444;
+  border-color: #FF4B55;
 }
 
 .error-text {
-  color: #EF4444;
+  color: #FF4B55;
   font-size: 12px;
   margin: 4px 0 0 0;
 }
@@ -684,67 +698,70 @@ const resetFilters = () => {
 .radio-list, .checkbox-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .radio-item, .checkbox-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   cursor: pointer;
+  position: relative;
 }
 
 .radio-item input, .checkbox-item input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .custom-radio {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #D1D5DB;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E5E7EB;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: border-color 0.2s;
   box-sizing: border-box;
 }
 
 .radio-item input:checked + .custom-radio {
-  border-color: #00B5B5;
+  border-color: #0096B1;
 }
 
 .radio-item input:checked + .custom-radio::after {
   content: "";
-  width: 8px;
-  height: 8px;
-  background: #00B5B5;
+  width: 10px;
+  height: 10px;
+  background: #0096B1;
   border-radius: 50%;
 }
 
 .custom-checkbox {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #D1D5DB;
-  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #E5E7EB;
+  border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
   box-sizing: border-box;
 }
 
 .custom-checkbox svg {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   opacity: 0;
 }
 
 .checkbox-item input:checked + .custom-checkbox {
-  background: #00B5B5;
-  border-color: #00B5B5;
+  background: #0096B1;
+  border-color: #0096B1;
 }
 
 .checkbox-item input:checked + .custom-checkbox svg {
@@ -752,31 +769,29 @@ const resetFilters = () => {
 }
 
 .radio-label, .checkbox-label {
-  font-size: 14px;
-  color: #374151;
+  font-size: 15px;
+  color: #111827;
 }
 
 /* Responsive */
-@media (max-width: 1279px) {
-  .left-column { width: 65%; }
-  .right-column { width: 35%; }
-}
-
 @media (max-width: 1024px) {
   .main-layout {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
-  .left-column { width: 100%; }
+  
   .right-column { 
     width: 100%;
     position: static;
-    max-height: none;
+    margin-top: 0;
   }
+  
   .mobile-hidden {
     display: none;
   }
+  
   .mobile-filter-btn {
     display: block;
+    margin-bottom: 24px;
   }
 }
 
@@ -784,17 +799,13 @@ const resetFilters = () => {
   .search-row {
     flex-direction: column;
   }
+  
   .search-btn {
     width: 100%;
   }
-  .input-wrapper input, .search-btn, .mobile-filter-btn {
-    min-height: 44px;
-  }
-  .select-wrapper select, .custom-input, .range-inputs input {
-    min-height: 44px;
-  }
-  .sm-select {
-    min-height: 44px !important;
+  
+  .vacancies-container {
+    padding: 20px 16px;
   }
 }
 </style>
