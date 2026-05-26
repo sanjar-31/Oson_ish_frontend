@@ -8,6 +8,8 @@ import Login from '@/views/Login.vue'
 import Monitoring from '@/views/Monitoring.vue'
 import Offers from '@/views/Offers.vue'
 import Company from '@/views/Company.vue'
+import Tashkilotlar from '@/views/Tashkilotlar.vue'
+import TashkilotlarCreate from '@/views/Tashkilotlar.vue'
 
 const routes = [
     {
@@ -51,9 +53,19 @@ const routes = [
         component: Company
     },
     {
+        path: '/tashkilotlar',
+        name: 'Tashkilotlar',
+        component: Tashkilotlar
+    },
+    {
         path: '/resume/create',
         name: 'ResumeCreate',
         component: ComingSoon
+    },
+    {
+        path: '/tashkilotlar/create',
+        name: 'TashkilotlarCreate',
+        component: TashkilotlarCreate
     },
     {
         path: '/vacancy/create',

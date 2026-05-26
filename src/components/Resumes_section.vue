@@ -351,6 +351,7 @@ const tilOchirish = (id) => {
   background: #F9FAFB;
   min-height: 100vh;
   padding: 40px 0;
+  overflow-x: hidden;
 }
 
 .container {
@@ -419,6 +420,8 @@ const tilOchirish = (id) => {
 
 /* Filters Sidebar */
 .filters-sidebar {
+  position: sticky;
+  top: 24px;
   align-self: flex-start;
   height: fit-content;
 }
@@ -673,5 +676,115 @@ const tilOchirish = (id) => {
   border: none;
   cursor: pointer;
   padding: 4px;
+}
+
+/* Responsive Rules */
+@media (max-width: 1439px) {
+  .container { padding: 0 24px; }
+  .layout { gap: 24px; }
+}
+
+@media (max-width: 1024px) {
+  .page-title { font-size: 28px; }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .filters-sidebar {
+    position: static;
+    width: 100%;
+    order: 2;
+  }
+  .main-column {
+    order: 1;
+    min-width: 0;
+  }
+  .filters-panel {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .resumes-section { padding: 24px 20px; }
+  .container { padding: 0 16px; }
+  .layout { gap: 20px; }
+  .page-title { font-size: 24px; }
+  
+  .filter-group > label, .radio-label, .checkbox-label { font-size: 14px; }
+  .result-count { font-size: 13px; }
+  
+  .search-box {
+    flex-direction: column;
+  }
+  .search-btn {
+    width: 100%;
+    height: 52px;
+  }
+  
+  .search-input-wrapper input, 
+  .select-wrapper select, 
+  .input-row input {
+    min-height: 44px;
+  }
+  .search-btn, .clear-btn, .add-lang-btn {
+    min-height: 44px;
+  }
+  
+  .radio-item, .checkbox-item {
+    min-height: 44px;
+  }
+  .radio-mark, .checkbox-mark {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  
+  .remove-lang-btn {
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .resumes-section { padding: 20px 16px; }
+  .layout { gap: 16px; }
+  .page-title { font-size: 20px; }
+  
+  .filter-group > label, .radio-label, .checkbox-label { 
+    font-size: 13px; 
+    line-height: 1.4; 
+    word-break: break-word; 
+  }
+  .filters-panel { padding: 16px; }
+  .lang-row { 
+    display: flex; 
+    align-items: center; 
+  }
+}
+
+@media (max-width: 400px) {
+  .input-row {
+    flex-direction: column;
+  }
+  .flex-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 375px) {
+  .resumes-section { padding: 16px 12px; }
+  .container { padding: 0 12px; }
+  .layout { gap: 12px; }
+  .result-count { font-size: 12px; }
+  
+  .search-input-wrapper input, 
+  .select-wrapper select, 
+  .input-row input {
+    height: 48px;
+    font-size: 14px;
+  }
 }
 </style>

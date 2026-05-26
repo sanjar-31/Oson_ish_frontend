@@ -51,7 +51,7 @@
                 </div>
               </div>
 
-              <router-link to="/offers" class="heart-link" @click.prevent="isMessagesOpen = true">
+              <router-link to="/tashkilotlar/create" class="heart-link" @click.prevent="isMessagesOpen = true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   aria-hidden="true">
                   <path
