@@ -141,6 +141,7 @@ const clearStirError = () => {
   max-width: 1409px;
   margin: 0 auto;
   padding: 40px 0;
+  overflow-x: hidden;
 }
 
 .page-title {
@@ -159,6 +160,7 @@ const clearStirError = () => {
 
 .content-column {
   min-width: 0;
+  overflow: hidden;
 }
 
 .search-row {
@@ -299,6 +301,8 @@ const clearStirError = () => {
 
 /* Sidebar Styling */
 .filters-sidebar {
+  position: sticky;
+  top: 24px;
   align-self: flex-start;
   height: fit-content;
   background: #ffffff;
@@ -414,8 +418,14 @@ const clearStirError = () => {
   bottom: -20px;
 }
 
-/* Responsive */
+/* Responsive Rules */
+@media (max-width: 1439px) {
+  .main-content { padding: 32px 24px; }
+  .main-layout { gap: 24px; }
+}
+
 @media (max-width: 1024px) {
+  .page-title { font-size: 28px; }
   .main-layout {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -423,18 +433,80 @@ const clearStirError = () => {
   .filters-sidebar {
     position: static;
     width: 100%;
+    order: 2;
+  }
+  .content-column {
+    order: 1;
   }
 }
 
 @media (max-width: 768px) {
+  .main-content { padding: 24px 20px; }
+  .main-layout { gap: 20px; }
+  .page-title { font-size: 24px; }
+  
+  .filter-label, .company-name { font-size: 16px; }
+  .filter-label { font-size: 14px; }
+  .results-count { font-size: 13px; }
+  
   .search-row {
     flex-direction: column;
+    gap: 10px;
   }
   .search-button {
     width: 100%;
+    height: 52px;
   }
-  .main-content {
-    padding: 20px 0;
+  
+  .search-input, .filter-select, .filter-input {
+    min-height: 44px;
+  }
+  .clear-button {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content { padding: 20px 16px; }
+  .main-layout { gap: 16px; }
+  .page-title { font-size: 20px; }
+  
+  .filter-label { 
+    font-size: 13px; 
+    line-height: 1.4; 
+    word-break: break-word; 
+  }
+  
+  .company-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .card-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .company-name {
+    font-size: 15px;
+  }
+  .vacancy-badge {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content { padding: 16px 12px; }
+  .main-layout { gap: 12px; }
+  .results-count { font-size: 12px; }
+  
+  .search-input {
+    height: 48px;
+    font-size: 14px;
+    padding-left: 44px;
+  }
+  .filter-select, .filter-input {
+    height: 48px;
+    font-size: 13px;
   }
 }
 </style>
